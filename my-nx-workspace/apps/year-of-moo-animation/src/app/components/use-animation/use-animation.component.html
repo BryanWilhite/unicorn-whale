@@ -1,4 +1,5 @@
 <my-nx-workspace-menu></my-nx-workspace-menu>
-<p>
-    use-animation works!
-</p>
+<div [@popOverState]="stateName">
+        <p>Hello! I'm a helpful message.</p>
+</div>
+<button (click)="toggle()">Toggle PopOver</button>

@@ -1,4 +1,5 @@
 import { BrowserModule } from '@angular/platform-browser';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { NgModule } from '@angular/core';
 import { NxModule } from '@nrwl/nx';
 
@@ -18,7 +19,12 @@ import { AnimationBuilderComponent } from './components/animation-builder/animat
         UseAnimationComponent,
         AnimationBuilderComponent
     ],
-    imports: [BrowserModule, NxModule.forRoot(), RoutingModule],
+    imports: [
+        BrowserModule,
+        BrowserAnimationsModule,
+        NxModule.forRoot(),
+        RoutingModule
+    ],
     providers: [],
     bootstrap: [AppComponent]
 })
