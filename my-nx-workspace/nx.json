@@ -7,5 +7,12 @@
     "tslint.json": "*",
     "nx.json": "*"
   },
-  "projects": {}
+  "projects": {
+    "fire-base-animation": {
+      "tags": []
+    },
+    "fire-base-animation-e2e": {
+      "tags": []
+    }
+  }
 }

@@ -2,13 +2,156 @@
   "$schema": "./node_modules/@angular/cli/lib/config/schema.json",
   "version": 1,
   "newProjectRoot": "",
-  "projects": {},
+  "projects": {
+    "fire-base-animation": {
+      "root": "apps/fire-base-animation/",
+      "sourceRoot": "apps/fire-base-animation/src",
+      "projectType": "application",
+      "prefix": "my-nx-workspace",
+      "schematics": {
+        "@schematics/angular:component": {
+          "styleext": "scss",
+          "spec": false
+        },
+        "@schematics/angular:class": {
+          "spec": false
+        },
+        "@schematics/angular:directive": {
+          "spec": false
+        },
+        "@schematics/angular:guard": {
+          "spec": false
+        },
+        "@schematics/angular:module": {
+          "spec": false
+        },
+        "@schematics/angular:pipe": {
+          "spec": false
+        },
+        "@schematics/angular:service": {
+          "spec": false
+        }
+      },
+      "architect": {
+        "build": {
+          "builder": "@angular-devkit/build-angular:browser",
+          "options": {
+            "outputPath": "dist/apps/fire-base-animation",
+            "index": "apps/fire-base-animation/src/index.html",
+            "main": "apps/fire-base-animation/src/main.ts",
+            "polyfills": "apps/fire-base-animation/src/polyfills.ts",
+            "tsConfig": "apps/fire-base-animation/tsconfig.app.json",
+            "assets": [
+              "apps/fire-base-animation/src/favicon.ico",
+              "apps/fire-base-animation/src/assets"
+            ],
+            "styles": [
+              "apps/fire-base-animation/src/styles.scss"
+            ],
+            "scripts": []
+          },
+          "configurations": {
+            "production": {
+              "fileReplacements": [
+                {
+                  "replace": "apps/fire-base-animation/src/environments/environment.ts",
+                  "with": "apps/fire-base-animation/src/environments/environment.prod.ts"
+                }
+              ],
+              "optimization": true,
+              "outputHashing": "all",
+              "sourceMap": false,
+              "extractCss": true,
+              "namedChunks": false,
+              "aot": true,
+              "extractLicenses": true,
+              "vendorChunk": false,
+              "buildOptimizer": true
+            }
+          }
+        },
+        "serve": {
+          "builder": "@angular-devkit/build-angular:dev-server",
+          "options": {
+            "browserTarget": "fire-base-animation:build"
+          },
+          "configurations": {
+            "production": {
+              "browserTarget": "fire-base-animation:build:production"
+            }
+          }
+        },
+        "extract-i18n": {
+          "builder": "@angular-devkit/build-angular:extract-i18n",
+          "options": {
+            "browserTarget": "fire-base-animation:build"
+          }
+        },
+        "test": {
+          "builder": "@angular-devkit/build-angular:karma",
+          "options": {
+            "main": "apps/fire-base-animation/src/test.ts",
+            "polyfills": "apps/fire-base-animation/src/polyfills.ts",
+            "tsConfig": "apps/fire-base-animation/tsconfig.spec.json",
+            "karmaConfig": "apps/fire-base-animation/karma.conf.js",
+            "styles": [
+              "apps/fire-base-animation/src/styles.scss"
+            ],
+            "scripts": [],
+            "assets": [
+              "apps/fire-base-animation/src/favicon.ico",
+              "apps/fire-base-animation/src/assets"
+            ]
+          }
+        },
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": [
+              "apps/fire-base-animation/tsconfig.app.json",
+              "apps/fire-base-animation/tsconfig.spec.json"
+            ],
+            "exclude": [
+              "**/node_modules/**"
+            ]
+          }
+        }
+      }
+    },
+    "fire-base-animation-e2e": {
+      "root": "apps/fire-base-animation-e2e/",
+      "projectType": "application",
+      "architect": {
+        "e2e": {
+          "builder": "@angular-devkit/build-angular:protractor",
+          "options": {
+            "protractorConfig": "apps/fire-base-animation-e2e/protractor.conf.js",
+            "devServerTarget": "fire-base-animation:serve"
+          },
+          "configurations": {
+            "production": {
+              "devServerTarget": "fire-base-animation:serve:production"
+            }
+          }
+        },
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": "apps/fire-base-animation-e2e/tsconfig.e2e.json",
+            "exclude": [
+              "**/node_modules/**"
+            ]
+          }
+        }
+      }
+    }
+  },
   "cli": {
     "warnings": {
       "typescriptMismatch": false,
       "versionMismatch": false
     },
     "defaultCollection": "@nrwl/schematics"
-    
-  }
+  },
+  "defaultProject": "fire-base-animation"
 }
