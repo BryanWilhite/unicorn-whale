@@ -1,4 +1,9 @@
 <my-nx-workspace-menu></my-nx-workspace-menu>
-<p>
-    callbacks works!
-</p>
+<div>
+    <img [@photoState]="position" alt="kitten" (@photoState.start)="logAnimation($event)" (@photoState.done)="logAnimation($event)" class="photo" src="https://placekitten.com/301/301" />
+
+    <button (click)="changePosition('move')" class="button">Translate</button>
+    <button (click)="changePosition('spin')" class="button">Rotate</button>
+    <button (click)="changePosition('enlarge')" class="button">Scale</button>
+    <button (click)="changePosition(null)" class="button">Reset</button>
+</div>
