@@ -144,6 +144,148 @@
           }
         }
       }
+    },
+    "year-of-moo-animation": {
+      "root": "apps/year-of-moo-animation/",
+      "sourceRoot": "apps/year-of-moo-animation/src",
+      "projectType": "application",
+      "prefix": "my-nx-workspace",
+      "schematics": {
+        "@schematics/angular:component": {
+          "styleext": "scss",
+          "spec": false
+        },
+        "@schematics/angular:class": {
+          "spec": false
+        },
+        "@schematics/angular:directive": {
+          "spec": false
+        },
+        "@schematics/angular:guard": {
+          "spec": false
+        },
+        "@schematics/angular:module": {
+          "spec": false
+        },
+        "@schematics/angular:pipe": {
+          "spec": false
+        },
+        "@schematics/angular:service": {
+          "spec": false
+        }
+      },
+      "architect": {
+        "build": {
+          "builder": "@angular-devkit/build-angular:browser",
+          "options": {
+            "outputPath": "dist/apps/year-of-moo-animation",
+            "index": "apps/year-of-moo-animation/src/index.html",
+            "main": "apps/year-of-moo-animation/src/main.ts",
+            "polyfills": "apps/year-of-moo-animation/src/polyfills.ts",
+            "tsConfig": "apps/year-of-moo-animation/tsconfig.app.json",
+            "assets": [
+              "apps/year-of-moo-animation/src/favicon.ico",
+              "apps/year-of-moo-animation/src/assets"
+            ],
+            "styles": [
+              "apps/year-of-moo-animation/src/styles.scss"
+            ],
+            "scripts": []
+          },
+          "configurations": {
+            "production": {
+              "fileReplacements": [
+                {
+                  "replace": "apps/year-of-moo-animation/src/environments/environment.ts",
+                  "with": "apps/year-of-moo-animation/src/environments/environment.prod.ts"
+                }
+              ],
+              "optimization": true,
+              "outputHashing": "all",
+              "sourceMap": false,
+              "extractCss": true,
+              "namedChunks": false,
+              "aot": true,
+              "extractLicenses": true,
+              "vendorChunk": false,
+              "buildOptimizer": true
+            }
+          }
+        },
+        "serve": {
+          "builder": "@angular-devkit/build-angular:dev-server",
+          "options": {
+            "browserTarget": "year-of-moo-animation:build"
+          },
+          "configurations": {
+            "production": {
+              "browserTarget": "year-of-moo-animation:build:production"
+            }
+          }
+        },
+        "extract-i18n": {
+          "builder": "@angular-devkit/build-angular:extract-i18n",
+          "options": {
+            "browserTarget": "year-of-moo-animation:build"
+          }
+        },
+        "test": {
+          "builder": "@angular-devkit/build-angular:karma",
+          "options": {
+            "main": "apps/year-of-moo-animation/src/test.ts",
+            "polyfills": "apps/year-of-moo-animation/src/polyfills.ts",
+            "tsConfig": "apps/year-of-moo-animation/tsconfig.spec.json",
+            "karmaConfig": "apps/year-of-moo-animation/karma.conf.js",
+            "styles": [
+              "apps/year-of-moo-animation/src/styles.scss"
+            ],
+            "scripts": [],
+            "assets": [
+              "apps/year-of-moo-animation/src/favicon.ico",
+              "apps/year-of-moo-animation/src/assets"
+            ]
+          }
+        },
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": [
+              "apps/year-of-moo-animation/tsconfig.app.json",
+              "apps/year-of-moo-animation/tsconfig.spec.json"
+            ],
+            "exclude": [
+              "**/node_modules/**"
+            ]
+          }
+        }
+      }
+    },
+    "year-of-moo-animation-e2e": {
+      "root": "apps/year-of-moo-animation-e2e/",
+      "projectType": "application",
+      "architect": {
+        "e2e": {
+          "builder": "@angular-devkit/build-angular:protractor",
+          "options": {
+            "protractorConfig": "apps/year-of-moo-animation-e2e/protractor.conf.js",
+            "devServerTarget": "year-of-moo-animation:serve"
+          },
+          "configurations": {
+            "production": {
+              "devServerTarget": "year-of-moo-animation:serve:production"
+            }
+          }
+        },
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": "apps/year-of-moo-animation-e2e/tsconfig.e2e.json",
+            "exclude": [
+              "**/node_modules/**"
+            ]
+          }
+        }
+      }
     }
   },
   "cli": {
