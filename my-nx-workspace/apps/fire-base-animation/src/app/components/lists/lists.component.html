@@ -1,4 +1,6 @@
 <my-nx-workspace-menu></my-nx-workspace-menu>
-<p>
-    lists works!
-</p>
+<div [@photosAnimation]="photos.length">
+    <div *ngFor="let photo of photos">
+        <img [src]="photo">
+    </div>
+</div>
