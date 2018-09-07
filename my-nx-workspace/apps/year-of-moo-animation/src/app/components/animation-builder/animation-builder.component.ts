@@ -53,11 +53,15 @@ export class AnimationBuilderComponent implements AfterViewInit, OnDestroy {
     constructor(private animationBuilder: AnimationBuilder) {}
 
     ngAfterViewInit(): void {
-        const div = AnimationBuilderComponent.getHtmlElement<HTMLDivElement>(this.photosContainer);
-        const children = AnimationBuilderComponent.getHtmlElements(div.children);
+        const div = AnimationBuilderComponent.getHtmlElement<HTMLDivElement>(
+            this.photosContainer
+        );
+        const children = AnimationBuilderComponent.getHtmlElements(
+            div.children
+        );
 
         this.photos = children
-            .filter(el => el.nodeName === 'img'.toUpperCase())
+            .filter(el => el.localName === 'img')
             .map(el => el as HTMLImageElement);
     }
 
@@ -67,47 +71,46 @@ export class AnimationBuilderComponent implements AfterViewInit, OnDestroy {
 
     slideBack(): void {
         this.photos.forEach(img => {
-            const player = this.getImgPlayer(slideBackAnimation, img);
+            const player = this.getPlayer(slideBackAnimation, img);
             player.play();
         });
     }
 
     slideForward(): void {
         this.photos.forEach(img => {
-            const player = this.getImgPlayer(slideForwardAnimation, img);
+            const player = this.getPlayer(slideForwardAnimation, img);
             player.play();
         });
     }
 
     slideDivBack(): void {
-        const div = AnimationBuilderComponent.getHtmlElement<HTMLDivElement>(this.simpleBlock);
-        const player = this.getDivPlayer(slideBackAnimation, div);
+        const div = AnimationBuilderComponent.getHtmlElement<HTMLDivElement>(
+            this.simpleBlock
+        );
+        const player = this.getPlayer(slideBackAnimation, div);
         player.play();
     }
 
     slideDivForward(): void {
-        const div = AnimationBuilderComponent.getHtmlElement<HTMLDivElement>(this.simpleBlock);
-        const player = this.getDivPlayer(slideForwardAnimation, div);
+        const div = AnimationBuilderComponent.getHtmlElement<HTMLDivElement>(
+            this.simpleBlock
+        );
+        const player = this.getPlayer(slideForwardAnimation, div);
         player.play();
     }
 
-    private getDivPlayer(
+    private getPlayer(
         animationMetadata: AnimationReferenceMetadata,
-        div: HTMLDivElement
+        el: Element
     ): AnimationPlayer {
         const factory = this.animationBuilder.build(animationMetadata);
-        const x = div.clientWidth / 2;
-        const player = factory.create(div, { params: { x: x } });
-        return player;
-    }
-
-    private getImgPlayer(
-        animationMetadata: AnimationReferenceMetadata,
-        img: HTMLImageElement
-    ): AnimationPlayer {
-        const factory = this.animationBuilder.build(animationMetadata);
-        const x = img.clientWidth / 2;
-        const player = factory.create(img, { params: { x: x } });
+        const x = el.clientWidth / 2;
+        const player = factory.create(el, { params: { x: x } });
+        player.onDestroy(() => console.log(`player ${player['id']} destroyed`));
+        player.onDone(() => {
+            console.log(`player ${player['id']} done`, player);
+            setTimeout(() => player.destroy(), 500);
+        });
         return player;
     }
 }
