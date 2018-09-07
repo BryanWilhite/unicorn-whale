@@ -1,8 +1,17 @@
 import { animate, animation, style } from '@angular/animations';
 
-export const slideAnimation = animation(
+export const slideBackAnimation = animation(
     [
-        style({ transform: 'translateX(0px)' }),
+        animate(
+            '{{ time }} ease-out',
+            style({ transform: 'translateX(-{{ x }}px)' })
+        )
+    ],
+    { params: { time: '700ms', x: 100 } }
+);
+
+export const slideForwardAnimation = animation(
+    [
         animate(
             '{{ time }} ease-out',
             style({ transform: 'translateX({{ x }}px)' })
