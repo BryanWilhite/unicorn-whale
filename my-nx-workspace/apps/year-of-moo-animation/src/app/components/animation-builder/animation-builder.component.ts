@@ -13,6 +13,7 @@ import {
 } from '@angular/animations';
 
 import {
+    slideAnimations,
     slideBackAnimation,
     slideForwardAnimation
 } from '../../animations/slide.animation';
@@ -27,6 +28,7 @@ export class AnimationBuilderComponent implements AfterViewInit, OnDestroy {
     @ViewChild('simpleBlock') simpleBlock: ElementRef;
 
     private photos: HTMLImageElement[];
+    private players: Map<string, AnimationPlayer>;
 
     private static getHtmlElement<TElement>(elementRef: ElementRef): TElement {
         const el = elementRef.nativeElement as TElement;
@@ -63,22 +65,25 @@ export class AnimationBuilderComponent implements AfterViewInit, OnDestroy {
         this.photos = children
             .filter(el => el.localName === 'img')
             .map(el => el as HTMLImageElement);
+
+        this.players = new Map();
     }
 
     ngOnDestroy(): void {
         console.log('ngOnDestroy() called');
+        this.players.forEach(player => player.destroy());
     }
 
     slideBack(): void {
-        this.photos.forEach(img => {
-            const player = this.getPlayer(slideBackAnimation, img);
+        this.photos.forEach((img, i) => {
+            const player = this.getPlayer(slideBackAnimation.id, img, i);
             player.play();
         });
     }
 
     slideForward(): void {
-        this.photos.forEach(img => {
-            const player = this.getPlayer(slideForwardAnimation, img);
+        this.photos.forEach((img, i) => {
+            const player = this.getPlayer(slideForwardAnimation.id, img, i);
             player.play();
         });
     }
@@ -87,7 +92,7 @@ export class AnimationBuilderComponent implements AfterViewInit, OnDestroy {
         const div = AnimationBuilderComponent.getHtmlElement<HTMLDivElement>(
             this.simpleBlock
         );
-        const player = this.getPlayer(slideBackAnimation, div);
+        const player = this.getPlayer(slideBackAnimation.id, div);
         player.play();
     }
 
@@ -95,22 +100,29 @@ export class AnimationBuilderComponent implements AfterViewInit, OnDestroy {
         const div = AnimationBuilderComponent.getHtmlElement<HTMLDivElement>(
             this.simpleBlock
         );
-        const player = this.getPlayer(slideForwardAnimation, div);
+        const player = this.getPlayer(slideForwardAnimation.id, div);
         player.play();
     }
 
     private getPlayer(
-        animationMetadata: AnimationReferenceMetadata,
-        el: Element
+        animationId: string,
+        el: Element,
+        elIndex: number = 0
     ): AnimationPlayer {
-        const factory = this.animationBuilder.build(animationMetadata);
+        const uniqueId = `${animationId}-${el.localName}${elIndex}`;
+        if (this.players.has(uniqueId)) {
+            this.players.get(uniqueId).destroy();
+        }
+
+        const animation = slideAnimations.get(animationId);
+        const factory = this.animationBuilder.build(animation);
         const x = el.clientWidth / 2;
+
         const player = factory.create(el, { params: { x: x } });
-        player.onDestroy(() => console.log(`player ${player['id']} destroyed`));
-        player.onDone(() => {
-            console.log(`player ${player['id']} done`, player);
-            setTimeout(() => player.destroy(), 500);
-        });
+        player.onDestroy(() => console.log(`player ${uniqueId} destroyed`));
+        player.onDone(() => console.log(`player ${uniqueId} done`));
+        this.players.set(uniqueId, player);
+
         return player;
     }
 }
