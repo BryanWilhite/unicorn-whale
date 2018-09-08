@@ -6,11 +6,7 @@ import {
     ViewChild
 } from '@angular/core';
 
-import {
-    AnimationBuilder,
-    AnimationPlayer,
-    AnimationReferenceMetadata
-} from '@angular/animations';
+import { AnimationBuilder, AnimationPlayer } from '@angular/animations';
 
 import {
     slideAnimations,
