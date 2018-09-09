@@ -1,5 +1,13 @@
 import { Component, AfterViewInit, ElementRef, ViewChild } from '@angular/core';
 
+import { AnimationBuilder, AnimationPlayer } from '@angular/animations';
+
+import {
+    slideAnimations,
+    slideBackAnimation,
+    slideForwardAnimation
+} from '../../animations/slide.animation';
+
 @Component({
     selector: 'my-nx-workspace-thumbs-container',
     templateUrl: './thumbs-container.component.html',
@@ -9,8 +17,11 @@ export class ThumbsContainerComponent implements AfterViewInit {
     @ViewChild('thumbsContainer') thumbsContainer: ElementRef;
 
     private thumbsContainerDiv: HTMLDivElement;
+    private players: Map<string, AnimationPlayer>;
 
-    private static getHtmlElement<TElement>(elementRef: ElementRef): TElement {
+    private static getHtmlElement<TElement extends HTMLElement>(
+        elementRef: ElementRef
+    ): TElement {
         const el = elementRef.nativeElement as TElement;
         if (!el) {
             console.warn('the expected element is not here');
@@ -32,19 +43,42 @@ export class ThumbsContainerComponent implements AfterViewInit {
         return children;
     }
 
-    constructor() {}
+    constructor(private animationBuilder: AnimationBuilder) {}
 
     ngAfterViewInit(): void {
         this.thumbsContainerDiv = ThumbsContainerComponent.getHtmlElement<
             HTMLDivElement
         >(this.thumbsContainer);
+
+        this.players = new Map();
+    }
+
+    private getPlayer(
+        animationId: string,
+        params: {},
+        el: Element,
+        elIndex: number = 0
+    ): AnimationPlayer {
+        const uniqueId = `${animationId}-${el.localName}${elIndex}`;
+        if (this.players.has(uniqueId)) {
+            this.players.get(uniqueId).destroy();
+        }
+
+        const animation = slideAnimations.get(animationId);
+        const factory = this.animationBuilder.build(animation);
+
+        const player = factory.create(el, { params: params });
+        player.onDestroy(() => console.log(`player ${uniqueId} destroyed`));
+        player.onDone(() => console.log(`player ${uniqueId} done`));
+        this.players.set(uniqueId, player);
+
+        return player;
     }
 
     slideBlocks(direction: string): void {
         console.log({ direction: direction });
         const wrapperContainerWidth = this.thumbsContainerDiv.clientWidth;
         const blockWrapper = this.thumbsContainerDiv.firstElementChild;
-        const duration = 500;
         const wrapperLeft = blockWrapper.clientLeft;
         const cannotSlideLeft = () => {
             const fixedBlockWidth = 124;
@@ -58,35 +92,42 @@ export class ThumbsContainerComponent implements AfterViewInit {
                 Math.abs(wrapperLeft) + wrapperContainerWidth;
             return slideLeftLength >= totalWidth;
         };
+        const cannotSlideRight = () => blockWrapper.clientLeft >= 0;
         const getSlideRightLength = function() {
             const l = Math.abs(wrapperLeft);
             return l > wrapperContainerWidth ? wrapperContainerWidth : l;
         };
 
-        // console.log(
-        //     "blockWrapper:", blockWrapper,
-        //     "wrapperContainer:", wrapperContainer,
-        //     "wrapperContainerWidth:", wrapperContainerWidth,
-        //     "wrapperLeft", wrapperLeft
-        // );
+        console.log({
+            blockWrapper,
+            thumbsContainerDiv: this.thumbsContainerDiv,
+            wrapperContainerWidth,
+            wrapperLeft
+        });
 
         switch (direction) {
-            case "left":
+            case 'left':
                 if (cannotSlideLeft()) {
                     return;
                 }
-                // blockWrapper.animate({
-                //     left: "-=" + wrapperContainer.width()
-                // }, duration);
+                const leftPlayer = this.getPlayer(
+                    slideBackAnimation.id,
+                    { x: wrapperContainerWidth },
+                    blockWrapper
+                );
+                leftPlayer.play();
                 break;
-    
-            case "right":
-                // if (blockWrapper.position().left >= 0) {
-                //     return;
-                // }
-                // blockWrapper.animate({
-                //     left: "+=" + getSlideRightLength()
-                // }, duration);
+
+            case 'right':
+                if (cannotSlideRight()) {
+                    return;
+                }
+                const rightPlayer = this.getPlayer(
+                    slideBackAnimation.id,
+                    { x: getSlideRightLength() },
+                    blockWrapper
+                );
+                rightPlayer.play();
                 break;
         }
     }
