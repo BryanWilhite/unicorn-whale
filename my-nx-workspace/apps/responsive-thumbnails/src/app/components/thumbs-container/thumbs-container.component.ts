@@ -2,19 +2,7 @@ import { Component, AfterViewInit, ElementRef, ViewChild } from '@angular/core';
 
 import { AnimationBuilder, AnimationPlayer } from '@angular/animations';
 
-import {
-    slideAnimations,
-    slideLeftAnimation,
-    slideRightAnimation
-} from '../../animations/slide.animation';
-
-// see https://stackoverflow.com/a/48182999/22944
-
-// Internet Explorer 6-11
-const isIE = /*@cc_on!@*/ false || !!document['documentMode'];
-
-// Edge 20+
-const isEdge = !isIE && !!window['StyleMedia'];
+import { slideAnimations, slideAnimation } from '../../animations/slide.animation';
 
 @Component({
     selector: 'my-nx-workspace-thumbs-container',
@@ -122,46 +110,54 @@ export class ThumbsContainerComponent implements AfterViewInit {
         const fixedBlockWidth = 124;
         const totalWidth = fixedBlockWidth * blocks.length;
 
-        const cannotSlideLeft = () => {
+        const cannotSlideBack = () => {
             const slideLeftLength =
                 Math.abs(wrapperLeft) + wrapperContainerWidth;
             return slideLeftLength >= totalWidth;
         };
-        const cannotSlideRight = () => wrapperLeft >= 0;
+        const cannotSlideForward = () => wrapperLeft >= 0;
 
-        const getSlideRightLength = function(): number {
+        const getSlideForwardLength = function(): number {
             const l = Math.abs(wrapperLeft);
             return l > wrapperContainerWidth ? wrapperContainerWidth : l;
         };
 
         console.log({
-            getSlideRightLength: getSlideRightLength(),
+            getSlideRightLength: getSlideForwardLength(),
             wrapperContainerWidth,
             wrapperLeft
         });
 
         switch (direction) {
-            case 'left':
-                // if (cannotSlideLeft()) {
-                //     console.warn('cannot slide left');
-                //     return;
-                // }
+            case 'forward':
+                if (cannotSlideForward()) {
+                    console.warn('cannot slide forward');
+                    return;
+                }
                 const lPlayer = this.getPlayer(
-                    slideRightAnimation.id,
-                    { time: '700ms', x1: wrapperLeft, x2: wrapperLeft + fixedBlockWidth },
+                    slideAnimation.id,
+                    {
+                        time: '700ms',
+                        x1: wrapperLeft,
+                        x2: wrapperLeft + getSlideForwardLength()
+                    },
                     this.thumbsContainerDivWrapper
                 );
                 lPlayer.play();
                 break;
 
-            case 'right':
-                // if (cannotSlideRight()) {
-                //     console.warn('cannot slide right');
-                //     return;
-                // }
+            case 'back':
+                if (cannotSlideBack()) {
+                    console.warn('cannot slide back');
+                    return;
+                }
                 const rPlayer = this.getPlayer(
-                    slideLeftAnimation.id,
-                    { time: '700ms', x1: wrapperLeft, x2: wrapperLeft - fixedBlockWidth },
+                    slideAnimation.id,
+                    {
+                        time: '700ms',
+                        x1: wrapperLeft,
+                        x2: wrapperLeft - wrapperContainerWidth
+                    },
                     this.thumbsContainerDivWrapper
                 );
                 rPlayer.play();

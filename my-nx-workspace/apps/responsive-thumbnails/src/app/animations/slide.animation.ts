@@ -5,18 +5,7 @@ import {
     style
 } from '@angular/animations';
 
-export const slideLeftAnimation = {
-    id: 'slide-left',
-    animation: animation(
-        [
-            style({ left: '{{ x1 }}px' }),
-            animate('{{ time }} ease-in', style({ left: '{{ x2 }}px' }))
-        ],
-        { params: { time: '700ms', x1: 0, x2: 100 } }
-    )
-};
-
-export const slideRightAnimation = {
+export const slideAnimation = {
     id: 'slide-right',
     animation: animation(
         [
@@ -28,6 +17,5 @@ export const slideRightAnimation = {
 };
 
 export const slideAnimations = new Map<string, AnimationReferenceMetadata>([
-    [slideRightAnimation.id, slideRightAnimation.animation],
-    [slideLeftAnimation.id, slideLeftAnimation.animation]
+    [slideAnimation.id, slideAnimation.animation]
 ]);
