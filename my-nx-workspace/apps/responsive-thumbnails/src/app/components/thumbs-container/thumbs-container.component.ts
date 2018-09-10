@@ -1,18 +1,20 @@
-import {
-    Component,
-    AfterViewInit,
-    ElementRef,
-    ViewChild,
-    ViewEncapsulation
-} from '@angular/core';
+import { Component, AfterViewInit, ElementRef, ViewChild } from '@angular/core';
 
 import { AnimationBuilder, AnimationPlayer } from '@angular/animations';
 
 import {
     slideAnimations,
-    slideBackAnimation,
-    slideForwardAnimation
+    slideLeftAnimation,
+    slideRightAnimation
 } from '../../animations/slide.animation';
+
+// see https://stackoverflow.com/a/48182999/22944
+
+// Internet Explorer 6-11
+const isIE = /*@cc_on!@*/ false || !!document['documentMode'];
+
+// Edge 20+
+const isEdge = !isIE && !!window['StyleMedia'];
 
 @Component({
     selector: 'my-nx-workspace-thumbs-container',
@@ -23,6 +25,8 @@ export class ThumbsContainerComponent implements AfterViewInit {
     @ViewChild('thumbsContainer') thumbsContainer: ElementRef;
 
     private thumbsContainerDiv: HTMLDivElement;
+    private thumbsContainerDivWrapper: HTMLDivElement;
+    private thumbsContainerDivWrapperStyleDeclaration: CSSStyleDeclaration;
     private players: Map<string, AnimationPlayer>;
 
     private static getHtmlElement<TElement extends HTMLElement>(
@@ -64,12 +68,20 @@ export class ThumbsContainerComponent implements AfterViewInit {
             HTMLDivElement
         >(this.thumbsContainer);
 
+        this.thumbsContainerDivWrapper = this.thumbsContainerDiv
+            .firstElementChild as HTMLDivElement;
+
+        this.thumbsContainerDivWrapperStyleDeclaration = ThumbsContainerComponent.getStyleDeclaration(
+            this.thumbsContainerDivWrapper
+        );
+        this.thumbsContainerDivWrapperStyleDeclaration.left = `${0}px`;
+
         this.players = new Map();
     }
 
     private getPlayer(
         animationId: string,
-        params: { x: number },
+        params: { time: string; x1: number; x2: number },
         el: Element,
         elIndex: number = 0
     ): AnimationPlayer {
@@ -85,11 +97,9 @@ export class ThumbsContainerComponent implements AfterViewInit {
         player.onDestroy(() => console.log(`player ${uniqueId} destroyed`));
         player.onDone(() => {
             console.log(`player ${uniqueId} done`);
-            const blockWrapper = this.thumbsContainerDiv.firstElementChild;
-            const style = ThumbsContainerComponent.getStyleDeclaration(
-                blockWrapper
-            );
-            style.left = `${params.x}px`;
+            this.thumbsContainerDivWrapperStyleDeclaration.left = `${
+                params.x2
+            }px`;
         });
         this.players.set(uniqueId, player);
 
@@ -100,32 +110,32 @@ export class ThumbsContainerComponent implements AfterViewInit {
         console.log({ direction: direction });
 
         const wrapperContainerWidth = this.thumbsContainerDiv.clientWidth;
-        const blockWrapper = this.thumbsContainerDiv.firstElementChild;
-        const style = ThumbsContainerComponent.getStyleDeclaration(
-            blockWrapper
-        );
+        const style = this.thumbsContainerDivWrapperStyleDeclaration;
         const wrapperLeft = style.left ? parseInt(style.left, 10) : 0;
+
+        const blocks = ThumbsContainerComponent.getHtmlElements(
+            this.thumbsContainerDivWrapper.children
+        )
+            .filter(el => el.localName === 'span')
+            .map(el => el as HTMLSpanElement);
+
+        const fixedBlockWidth = 124;
+        const totalWidth = fixedBlockWidth * blocks.length;
+
         const cannotSlideLeft = () => {
-            const fixedBlockWidth = 124;
-            const blocks = ThumbsContainerComponent.getHtmlElements(
-                blockWrapper.children
-            )
-                .filter(el => el.localName === 'span')
-                .map(el => el as HTMLSpanElement);
-            const totalWidth = fixedBlockWidth * blocks.length;
             const slideLeftLength =
                 Math.abs(wrapperLeft) + wrapperContainerWidth;
             return slideLeftLength >= totalWidth;
         };
         const cannotSlideRight = () => wrapperLeft >= 0;
-        const getSlideRightLength = function() {
+
+        const getSlideRightLength = function(): number {
             const l = Math.abs(wrapperLeft);
             return l > wrapperContainerWidth ? wrapperContainerWidth : l;
         };
 
-        console.log('onStart', {
-            blockWrapper,
-            thumbsContainerDiv: this.thumbsContainerDiv,
+        console.log({
+            getSlideRightLength: getSlideRightLength(),
             wrapperContainerWidth,
             wrapperLeft
         });
@@ -136,12 +146,12 @@ export class ThumbsContainerComponent implements AfterViewInit {
                 //     console.warn('cannot slide left');
                 //     return;
                 // }
-                const leftPlayer = this.getPlayer(
-                    slideForwardAnimation.id,
-                    { x: 0 },
-                    blockWrapper
+                const lPlayer = this.getPlayer(
+                    slideRightAnimation.id,
+                    { time: '700ms', x1: wrapperLeft, x2: wrapperLeft + fixedBlockWidth },
+                    this.thumbsContainerDivWrapper
                 );
-                leftPlayer.play();
+                lPlayer.play();
                 break;
 
             case 'right':
@@ -149,20 +159,13 @@ export class ThumbsContainerComponent implements AfterViewInit {
                 //     console.warn('cannot slide right');
                 //     return;
                 // }
-                const rightPlayer = this.getPlayer(
-                    slideBackAnimation.id,
-                    { x: 124 },
-                    blockWrapper
+                const rPlayer = this.getPlayer(
+                    slideLeftAnimation.id,
+                    { time: '700ms', x1: wrapperLeft, x2: wrapperLeft - fixedBlockWidth },
+                    this.thumbsContainerDivWrapper
                 );
-                rightPlayer.play();
+                rPlayer.play();
                 break;
         }
-
-        console.log('onDone', {
-            blockWrapper,
-            thumbsContainerDiv: this.thumbsContainerDiv,
-            wrapperContainerWidth,
-            wrapperLeft
-        });
     }
 }
