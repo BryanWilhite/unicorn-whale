@@ -10,8 +10,8 @@ export const slideBackAnimation = {
     animation: animation(
         [
             animate(
-                '{{ time }} ease-out',
-                style({ transform: 'translateX(-{{ x }}px)' })
+                '{{ time }} ease-in',
+                style({ left: '-{{ x }}px' })
             )
         ],
         { params: { time: '700ms', x: 100 } }
@@ -23,8 +23,8 @@ export const slideForwardAnimation = {
     animation: animation(
         [
             animate(
-                '{{ time }} ease-out',
-                style({ transform: 'translateX({{ x }}px)' })
+                '{{ time }} ease-in',
+                style({ left: '{{ x }}px' })
             )
         ],
         { params: { time: '700ms', x: 100 } }

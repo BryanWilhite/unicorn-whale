@@ -1,4 +1,10 @@
-import { Component, AfterViewInit, ElementRef, ViewChild } from '@angular/core';
+import {
+    Component,
+    AfterViewInit,
+    ElementRef,
+    ViewChild,
+    ViewEncapsulation
+} from '@angular/core';
 
 import { AnimationBuilder, AnimationPlayer } from '@angular/animations';
 
@@ -43,6 +49,14 @@ export class ThumbsContainerComponent implements AfterViewInit {
         return children;
     }
 
+    private static getStyleDeclaration(element: Element): CSSStyleDeclaration {
+        const style = element['style'] as CSSStyleDeclaration;
+        if (!style) {
+            console.warn('the expected CSS style declaration is not here');
+        }
+        return style;
+    }
+
     constructor(private animationBuilder: AnimationBuilder) {}
 
     ngAfterViewInit(): void {
@@ -55,7 +69,7 @@ export class ThumbsContainerComponent implements AfterViewInit {
 
     private getPlayer(
         animationId: string,
-        params: {},
+        params: { x: number },
         el: Element,
         elIndex: number = 0
     ): AnimationPlayer {
@@ -69,7 +83,14 @@ export class ThumbsContainerComponent implements AfterViewInit {
 
         const player = factory.create(el, { params: params });
         player.onDestroy(() => console.log(`player ${uniqueId} destroyed`));
-        player.onDone(() => console.log(`player ${uniqueId} done`));
+        player.onDone(() => {
+            console.log(`player ${uniqueId} done`);
+            const blockWrapper = this.thumbsContainerDiv.firstElementChild;
+            const style = ThumbsContainerComponent.getStyleDeclaration(
+                blockWrapper
+            );
+            style.left = `${params.x}px`;
+        });
         this.players.set(uniqueId, player);
 
         return player;
@@ -77,9 +98,13 @@ export class ThumbsContainerComponent implements AfterViewInit {
 
     slideBlocks(direction: string): void {
         console.log({ direction: direction });
+
         const wrapperContainerWidth = this.thumbsContainerDiv.clientWidth;
         const blockWrapper = this.thumbsContainerDiv.firstElementChild;
-        const wrapperLeft = blockWrapper.clientLeft;
+        const style = ThumbsContainerComponent.getStyleDeclaration(
+            blockWrapper
+        );
+        const wrapperLeft = style.left ? parseInt(style.left, 10) : 0;
         const cannotSlideLeft = () => {
             const fixedBlockWidth = 124;
             const blocks = ThumbsContainerComponent.getHtmlElements(
@@ -92,13 +117,13 @@ export class ThumbsContainerComponent implements AfterViewInit {
                 Math.abs(wrapperLeft) + wrapperContainerWidth;
             return slideLeftLength >= totalWidth;
         };
-        const cannotSlideRight = () => blockWrapper.clientLeft >= 0;
+        const cannotSlideRight = () => wrapperLeft >= 0;
         const getSlideRightLength = function() {
             const l = Math.abs(wrapperLeft);
             return l > wrapperContainerWidth ? wrapperContainerWidth : l;
         };
 
-        console.log({
+        console.log('onStart', {
             blockWrapper,
             thumbsContainerDiv: this.thumbsContainerDiv,
             wrapperContainerWidth,
@@ -107,28 +132,37 @@ export class ThumbsContainerComponent implements AfterViewInit {
 
         switch (direction) {
             case 'left':
-                if (cannotSlideLeft()) {
-                    return;
-                }
+                // if (cannotSlideLeft()) {
+                //     console.warn('cannot slide left');
+                //     return;
+                // }
                 const leftPlayer = this.getPlayer(
-                    slideBackAnimation.id,
-                    { x: wrapperContainerWidth },
+                    slideForwardAnimation.id,
+                    { x: 0 },
                     blockWrapper
                 );
                 leftPlayer.play();
                 break;
 
             case 'right':
-                if (cannotSlideRight()) {
-                    return;
-                }
+                // if (cannotSlideRight()) {
+                //     console.warn('cannot slide right');
+                //     return;
+                // }
                 const rightPlayer = this.getPlayer(
                     slideBackAnimation.id,
-                    { x: getSlideRightLength() },
+                    { x: 124 },
                     blockWrapper
                 );
                 rightPlayer.play();
                 break;
         }
+
+        console.log('onDone', {
+            blockWrapper,
+            thumbsContainerDiv: this.thumbsContainerDiv,
+            wrapperContainerWidth,
+            wrapperLeft
+        });
     }
 }
