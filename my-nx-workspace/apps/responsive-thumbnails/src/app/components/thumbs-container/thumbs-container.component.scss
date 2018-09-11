@@ -12,11 +12,15 @@
     }
 }
 
+$thumb-spacing: 4px;
+$thumb-width: 120px;
+$thumb-height: 90px;
+
 .block-container.wrapper {
     background-color: #add8e6;
-    height: 98px; /* 4 + 90 + 4 = 98 */
+    height: $thumb-spacing + $thumb-height + $thumb-spacing;
     margin: 0 auto;
-    max-width: 992px; /* (4 + 120 ) * 8 = 992 */
+    max-width: ($thumb-spacing + $thumb-width) * 8;
     overflow: hidden;
     position: relative;
     white-space: nowrap;
@@ -30,55 +34,35 @@
         display: inline-block;
         font-size: 2.4em;
         margin: 0;
-        margin-right: 4px;
-        height: 90px;
+        margin-right: $thumb-spacing;
+        height: $thumb-height;
         vertical-align: text-bottom;
-        width: 120px;
+        width: $thumb-width;
     }
 }
 
-/*
-    .block-container.wrapper
-    responsive widths:
-    (4 + 120 ) * 8 = 992
-    (4 + 120 ) * 7 = 868
-    (4 + 120 ) * 6 = 744
-    (4 + 120 ) * 5 = 620
-    (4 + 120 ) * 4 = 496
-    (4 + 120 ) * 3 = 372
-*/
+$thumbs-responsive-widths: (
+    /* (4 + 120 ) * 8 = 992 */ 8-thumbs: 992px,
+    /* (4 + 120 ) * 7 = 868 */ 7-thumbs: 868px,
+    /* (4 + 120 ) * 6 = 744 */ 6-thumbs: 744px,
+    /* (4 + 120 ) * 5 = 620 */ 5-thumbs: 620px,
+    /* (4 + 120 ) * 4 = 496 */ 4-thumbs: 496px,
+    /* (4 + 120 ) * 3 = 372 */ 3-thumbs: 372px,
+    media-max-width: (
+        /* measured by hand: 1040 */ 7-thumbs: 1040px,
+        /* (1040/868) * 744 = 891 */ 6-thumbs: 891px,
+        /* (1040/868) * 620 = 743 */ 5-thumbs: 743px,
+        /* (1040/868) * 420 = 594 */ 4-thumbs: 654px,
+        /* (1040/868) * 372 = 446 */ 3-thumbs: 446px
+    )
+);
 
-@media (max-width: 1040px) {
-    /* measured by hand: 1040 */
-    .block-container.wrapper {
-        width: 868px;
-    }
-}
+$thumbs-media-max-width: map-get($thumbs-responsive-widths, media-max-width);
 
-@media (max-width: 891px) {
-    /* (1040/868) * 744 = 891 */
-    .block-container.wrapper {
-        width: 744px;
-    }
-}
-
-@media (max-width: 743px) {
-    /* (1040/868) * 620 = 743 */
-    .block-container.wrapper {
-        width: 620px;
-    }
-}
-
-@media (max-width: 654px) {
-    /* (1040/868) * 420 = 594 */
-    .block-container.wrapper {
-        width: 496px;
-    }
-}
-
-@media (max-width: 446px) {
-    /* (1040/868) * 372 = 446 */
-    .block-container.wrapper {
-        width: 372px;
+@each $key, $value in $thumbs-media-max-width {
+    @media (max-width: map-get($thumbs-media-max-width, $key)) {
+        .block-container.wrapper {
+            width: map-get($thumbs-responsive-widths, $key);
+        }
     }
 }
