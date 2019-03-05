@@ -6,4 +6,20 @@ This temporary situation has led me to try the [workspace](https://nrwl.io/nx/gu
 
 Optimistically, this repo (and StackBlitz) will allow the Angular experimentation I am looking for.
 
+## the `apps/` folder
+
+The `apps/` [folder](./my-nx-workspace/apps) contains several, independent Angular sample apps. When running `ng server` or `npm start` the default application will run. To see the current default project run:
+
+```console
+ng config defaultProject
+```
+
+Set the default project with:
+
+```console
+ng config defaultProject foo
+```
+
+where `foo` is the name of the application. For more details, see [a comment for issue #6](https://github.com/BryanWilhite/unicorn-whale/issues/6#issuecomment-419257446).
+
 @[BryanWilhite](https://twitter.com/BryanWilhite)

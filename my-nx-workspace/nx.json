@@ -25,6 +25,12 @@
     },
     "responsive-thumbnails-e2e": {
       "tags": []
+    },
+    "http-client-testing": {
+      "tags": []
+    },
+    "http-client-testing-e2e": {
+      "tags": []
     }
   }
 }
