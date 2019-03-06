@@ -7,25 +7,41 @@ import { User, SearchResults } from '../../models/github-api.model';
 
 @Injectable()
 export class GitHubApiService {
-  readonly API_URL = 'https://api.github.com';
-  readonly WHAT = ['repositories', 'commits', 'code', 'issues', 'users'];
+  static readonly API_URL = 'https://api.github.com';
+
+  static readonly WHAT = ['repositories', 'commits', 'code', 'issues', 'users'];
 
   constructor(private http: HttpClient) {}
 
+  static getUsersSearchUri(): string {
+    return `${GitHubApiService.API_URL}/search/users`;
+  }
+
+  static getUsersUri(query: string | null = null): string {
+    return query
+      ? `${GitHubApiService.getUsersSearchUri()}?q=${query}`
+      : `${GitHubApiService.API_URL}/users`;
+  }
+
+  static getSearchErrorMessageForWhatException(what: string): string {
+    return `Searching for ${what} is not supported. The available types are: ${GitHubApiService.WHAT.join(
+      ', '
+    )}.`;
+  }
+
   getUsers() {
-    return this.http.get<User[]>(`${this.API_URL}/users`);
+    return this.http.get<User[]>(`${GitHubApiService.API_URL}/users`);
   }
 
   search<T>(what: string, params: HttpParams): Observable<SearchResults<T>> {
-    if (this.WHAT.indexOf(what) === -1) {
+    if (GitHubApiService.WHAT.indexOf(what) === -1) {
       return throwError(
-        `Searching for ${what} is not supported. The available types are: ${this.WHAT.join(
-          ', '
-        )}.`
+        GitHubApiService.getSearchErrorMessageForWhatException(what)
       );
     }
-    return this.http.get<SearchResults<T>>(`${this.API_URL}/search/${what}`, {
-      params
-    });
+    return this.http.get<SearchResults<T>>(
+      `${GitHubApiService.API_URL}/search/${what}`,
+      { params }
+    );
   }
 }

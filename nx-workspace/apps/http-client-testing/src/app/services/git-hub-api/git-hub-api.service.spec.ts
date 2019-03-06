@@ -3,7 +3,8 @@
 import { TestBed, getTestBed } from '@angular/core/testing';
 import {
   HttpClientTestingModule,
-  HttpTestingController
+  HttpTestingController,
+  TestRequest
 } from '@angular/common/http/testing';
 
 import { HttpParams } from '@angular/common/http';
@@ -14,7 +15,7 @@ import { User } from '../../models/github-api.model';
 describe('GitHubApiService', () => {
   let injector: TestBed;
   let service: GitHubApiService;
-  let httpMock: HttpTestingController;
+  let mockBackEnd: HttpTestingController;
 
   beforeEach(() => {
     TestBed.configureTestingModule({
@@ -24,7 +25,7 @@ describe('GitHubApiService', () => {
 
     injector = getTestBed();
     service = injector.get(GitHubApiService);
-    httpMock = injector.get(HttpTestingController);
+    mockBackEnd = injector.get(HttpTestingController);
   });
 
   it('should be created', () => {
@@ -36,36 +37,38 @@ describe('GitHubApiService', () => {
     it('should return an Observable<User[]>', () => {
       const dummyUsers: User[] = [new User(0, 'John'), new User(1, 'Doe')];
 
+      // service call will be deferred/intercepted
+      // by mock version of HttpClient in HttpClientTestingModule:
       service.getUsers().subscribe(users => {
         expect(users.length).toBe(2);
         expect(users).toEqual(dummyUsers);
-        console.log({users});
+        console.log({ users });
       });
 
-      const req = httpMock.expectOne(`${service.API_URL}/users`);
-      expect(req.request.method).toBe('GET');
-      req.flush(dummyUsers);
+      // setup expectations: one call for specified URI and GET method:
+      const testRequest: TestRequest = mockBackEnd.expectOne(GitHubApiService.getUsersUri());
+      expect(testRequest.request.method).toBe('GET');
+
+      // test expectations with dummy data:
+      testRequest.flush(dummyUsers);
     });
   });
 
   describe('#search', () => {
-    const dummyParams = new HttpParams().set('q', 'cironunes');
+    const name = 'cironunes';
+    const dummyParams = new HttpParams().set('q', name);
 
     it('should throw an error if trying to search for not supported `what`', () => {
-      service.search('unknown', dummyParams).subscribe(
+      const what = 'unknown';
+      service.search(what, dummyParams).subscribe(
         () => {},
         err => {
-          expect(err).toBe(
-            `Searching for unknown is not supported. The available types are: ${service.WHAT.join(
-              ', '
-            )}.`
-          );
+          expect(err).toBe(GitHubApiService.getSearchErrorMessageForWhatException(what));
         }
       );
 
-      const req = httpMock.expectNone(
-        `${service.API_URL}/search/users?q=cironunes`
-      );
+      // expectNone() is useful when an error is expected:
+      mockBackEnd.expectNone(GitHubApiService.getUsersUri(name));
     });
 
     it('should return an Observable<SearchResults>', () => {
@@ -73,12 +76,12 @@ describe('GitHubApiService', () => {
         expect(result.items.length).toBe(2);
       });
 
-      const req = httpMock.expectOne(
-        `${service.API_URL}/search/users?q=cironunes`
-      );
-      expect(req.request.url).toBe(`${service.API_URL}/search/users`);
+      // setup expectations: one call for specified URI and dummy `HttpParams`:
+      const req = mockBackEnd.expectOne(GitHubApiService.getUsersUri(name));
+      expect(req.request.url).toBe(GitHubApiService.getUsersSearchUri());
       expect(req.request.params).toEqual(dummyParams);
 
+      // test expectations with dummy data:
       req.flush({
         incomplete_results: false,
         items: [{}, {}],
