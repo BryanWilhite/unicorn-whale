@@ -1,0 +1,9 @@
+{
+  "extends": "./tsconfig.json",
+  "compilerOptions": {
+    "outDir": "../../dist/out-tsc/apps/http-client-testing",
+    "types": []
+  },
+  "exclude": ["src/test.ts", "**/*.spec.ts"],
+  "include": ["**/*.ts"]
+}

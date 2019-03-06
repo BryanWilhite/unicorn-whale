@@ -1,0 +1,144 @@
+{
+  "$schema": "./node_modules/@angular/cli/lib/config/schema.json",
+  "version": 1,
+  "newProjectRoot": "",
+  "projects": {
+    "http-client-testing": {
+      "root": "apps/http-client-testing/",
+      "sourceRoot": "apps/http-client-testing/src",
+      "projectType": "application",
+      "prefix": "nx-workspace",
+      "schematics": {
+        "@nrwl/schematics:component": {
+          "style": "scss"
+        }
+      },
+      "architect": {
+        "build": {
+          "builder": "@angular-devkit/build-angular:browser",
+          "options": {
+            "outputPath": "dist/apps/http-client-testing",
+            "index": "apps/http-client-testing/src/index.html",
+            "main": "apps/http-client-testing/src/main.ts",
+            "polyfills": "apps/http-client-testing/src/polyfills.ts",
+            "tsConfig": "apps/http-client-testing/tsconfig.app.json",
+            "assets": [
+              "apps/http-client-testing/src/favicon.ico",
+              "apps/http-client-testing/src/assets"
+            ],
+            "styles": ["apps/http-client-testing/src/styles.scss"],
+            "scripts": [],
+            "es5BrowserSupport": true
+          },
+          "configurations": {
+            "production": {
+              "fileReplacements": [
+                {
+                  "replace": "apps/http-client-testing/src/environments/environment.ts",
+                  "with": "apps/http-client-testing/src/environments/environment.prod.ts"
+                }
+              ],
+              "optimization": true,
+              "outputHashing": "all",
+              "sourceMap": false,
+              "extractCss": true,
+              "namedChunks": false,
+              "aot": true,
+              "extractLicenses": true,
+              "vendorChunk": false,
+              "buildOptimizer": true,
+              "budgets": [
+                {
+                  "type": "initial",
+                  "maximumWarning": "2mb",
+                  "maximumError": "5mb"
+                }
+              ]
+            }
+          }
+        },
+        "serve": {
+          "builder": "@angular-devkit/build-angular:dev-server",
+          "options": {
+            "browserTarget": "http-client-testing:build"
+          },
+          "configurations": {
+            "production": {
+              "browserTarget": "http-client-testing:build:production"
+            }
+          }
+        },
+        "extract-i18n": {
+          "builder": "@angular-devkit/build-angular:extract-i18n",
+          "options": {
+            "browserTarget": "http-client-testing:build"
+          }
+        },
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": [
+              "apps/http-client-testing/tsconfig.app.json",
+              "apps/http-client-testing/tsconfig.spec.json"
+            ],
+            "exclude": ["**/node_modules/**"]
+          }
+        },
+        "test": {
+          "builder": "@angular-devkit/build-angular:karma",
+          "options": {
+            "main": "apps/http-client-testing/src/test.ts",
+            "tsConfig": "apps/http-client-testing/tsconfig.spec.json",
+            "karmaConfig": "apps/http-client-testing/karma.conf.js",
+            "polyfills": "apps/http-client-testing/src/polyfills.ts",
+            "styles": [],
+            "scripts": [],
+            "assets": []
+          }
+        }
+      }
+    },
+    "http-client-testing-e2e": {
+      "root": "apps/http-client-testing-e2e",
+      "projectType": "application",
+      "prefix": "",
+      "architect": {
+        "e2e": {
+          "builder": "@angular-devkit/build-angular:protractor",
+          "options": {
+            "protractorConfig": "apps/http-client-testing-e2e/protractor.conf.js",
+            "devServerTarget": "http-client-testing:serve"
+          },
+          "configurations": {
+            "production": {
+              "devServerTarget": "http-client-testing:serve:production"
+            }
+          }
+        },
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": "apps/http-client-testing-e2e/tsconfig.e2e.json",
+            "exclude": ["**/node_modules/**"]
+          }
+        }
+      }
+    }
+  },
+  "cli": {
+    "warnings": {
+      "typescriptMismatch": false,
+      "versionMismatch": false
+    },
+    "defaultCollection": "@nrwl/schematics"
+  },
+  "schematics": {
+    "@nrwl/schematics:application": {
+      "style": "scss"
+    },
+    "@nrwl/schematics:library": {
+      "style": "scss"
+    }
+  },
+  "defaultProject": "http-client-testing"
+}
