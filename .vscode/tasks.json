@@ -6,19 +6,33 @@
         {
             "type": "npm",
             "script": "build",
-            "path": "my-nx-workspace/",
+            "path": "nx-workspace/",
             "problemMatcher": []
         },
         {
             "type": "npm",
             "script": "start",
-            "path": "my-nx-workspace/",
+            "path": "nx-workspace/",
             "problemMatcher": []
         },
         {
             "type": "npm",
             "script": "update:check",
-            "path": "my-nx-workspace/",
+            "path": "nx-workspace/",
+            "problemMatcher": []
+        },
+        {
+            "label": "ng config: set defaultProject",
+            "type": "shell",
+            "command": "ng",
+            "args": [
+                "config",
+                "defaultProject",
+                "${selectedText}"
+            ],
+            "options": {
+                "cwd": "${workspaceFolder}/nx-workspace"
+            },
             "problemMatcher": []
         }
     ]

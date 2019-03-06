@@ -13,6 +13,24 @@
     },
     "http-client-testing-e2e": {
       "tags": []
+    },
+    "fire-base-animation": {
+      "tags": []
+    },
+    "fire-base-animation-e2e": {
+      "tags": []
+    },
+    "responsive-thumbnails": {
+      "tags": []
+    },
+    "responsive-thumbnails-e2e": {
+      "tags": []
+    },
+    "year-of-moo-animation": {
+      "tags": []
+    },
+    "year-of-moo-animation-e2e": {
+      "tags": []
     }
   }
 }
