@@ -9,7 +9,7 @@ import {
 } from '@angular/animations';
 
 @Component({
-    selector: 'my-nx-workspace-multi-state',
+    selector: 'nx-workspace-multi-state',
     templateUrl: './multi-state.component.html',
     styleUrls: ['./multi-state.component.scss'],
     animations: [

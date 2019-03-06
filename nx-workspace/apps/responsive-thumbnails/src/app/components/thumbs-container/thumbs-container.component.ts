@@ -5,7 +5,7 @@ import { AnimationBuilder, AnimationPlayer } from '@angular/animations';
 import { slideAnimations, slideAnimation } from '../../animations/slide.animation';
 
 @Component({
-    selector: 'my-nx-workspace-thumbs-container',
+    selector: 'nx-workspace-thumbs-container',
     templateUrl: './thumbs-container.component.html',
     styleUrls: ['./thumbs-container.component.scss']
 })

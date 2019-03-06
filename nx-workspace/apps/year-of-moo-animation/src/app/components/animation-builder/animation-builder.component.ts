@@ -15,7 +15,7 @@ import {
 } from '../../animations/slide.animation';
 
 @Component({
-    selector: 'my-nx-workspace-animation-builder',
+    selector: 'nx-workspace-animation-builder',
     templateUrl: './animation-builder.component.html',
     styleUrls: ['./animation-builder.component.scss']
 })

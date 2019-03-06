@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 
 @Component({
-    selector: 'my-nx-workspace-menu',
+    selector: 'nx-workspace-menu',
     templateUrl: './menu.component.html',
     styleUrls: ['./menu.component.scss']
 })

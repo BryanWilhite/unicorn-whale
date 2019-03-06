@@ -9,7 +9,7 @@ import {
 } from '@angular/animations';
 
 @Component({
-    selector: 'my-nx-workspace-callbacks',
+    selector: 'nx-workspace-callbacks',
     templateUrl: './callbacks.component.html',
     styleUrls: ['./callbacks.component.scss'],
     animations: [

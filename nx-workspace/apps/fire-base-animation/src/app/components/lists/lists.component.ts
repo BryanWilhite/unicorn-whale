@@ -11,7 +11,7 @@ import {
 } from '@angular/animations';
 
 @Component({
-    selector: 'my-nx-workspace-lists',
+    selector: 'nx-workspace-lists',
     templateUrl: './lists.component.html',
     styleUrls: ['./lists.component.scss'],
     animations: [

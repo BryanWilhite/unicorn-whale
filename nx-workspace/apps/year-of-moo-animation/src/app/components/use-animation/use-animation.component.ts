@@ -14,7 +14,7 @@ import {
 } from '../../animations/fade.animation';
 
 @Component({
-    selector: 'my-nx-workspace-use-animation',
+    selector: 'nx-workspace-use-animation',
     templateUrl: './use-animation.component.html',
     styleUrls: ['./use-animation.component.scss'],
     animations: [

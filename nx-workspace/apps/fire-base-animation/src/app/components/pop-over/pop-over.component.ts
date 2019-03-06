@@ -9,7 +9,7 @@ import {
 } from '@angular/animations';
 
 @Component({
-    selector: 'my-nx-workspace-pop-over',
+    selector: 'nx-workspace-pop-over',
     templateUrl: './pop-over.component.html',
     styleUrls: ['./pop-over.component.scss'],
     animations: [

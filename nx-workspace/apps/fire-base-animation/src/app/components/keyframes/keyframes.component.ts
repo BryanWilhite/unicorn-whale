@@ -10,7 +10,7 @@ import {
 } from '@angular/animations';
 
 @Component({
-    selector: 'my-nx-workspace-keyframes',
+    selector: 'nx-workspace-keyframes',
     templateUrl: './keyframes.component.html',
     styleUrls: ['./keyframes.component.scss'],
     animations: [

@@ -8,7 +8,7 @@ Optimistically, this repo (and StackBlitz) will allow the Angular experimentatio
 
 ## the `apps/` folder
 
-The `apps/` [folder](./my-nx-workspace/apps) contains several, independent Angular sample apps. When running `ng server` or `npm start` the default application will run. To see the current default project run:
+The `apps/` [folder](./nx-workspace/apps) contains several, independent Angular sample apps. When running `ng server` or `npm start` the default application will run. To see the current default project run:
 
 ```console
 ng config defaultProject
