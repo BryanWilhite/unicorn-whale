@@ -31,6 +31,12 @@
     },
     "year-of-moo-animation-e2e": {
       "tags": []
+    },
+    "component-testing": {
+      "tags": []
+    },
+    "component-testing-e2e": {
+      "tags": []
     }
   }
 }

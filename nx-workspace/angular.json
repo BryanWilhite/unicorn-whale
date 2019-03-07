@@ -567,6 +567,152 @@
           }
         }
       }
+    },
+    "component-testing": {
+      "root": "apps/component-testing/",
+      "sourceRoot": "apps/component-testing/src",
+      "projectType": "application",
+      "prefix": "nx-workspace",
+      "schematics": {
+        "@nrwl/schematics:class": {
+          "skipTests": true
+        },
+        "@nrwl/schematics:component": {
+          "style": "scss",
+          "skipTests": true
+        },
+        "@nrwl/schematics:directive": {
+          "skipTests": true
+        },
+        "@nrwl/schematics:guard": {
+          "skipTests": true
+        },
+        "@nrwl/schematics:module": {
+          "skipTests": true
+        },
+        "@nrwl/schematics:pipe": {
+          "skipTests": true
+        },
+        "@nrwl/schematics:service": {
+          "skipTests": true
+        }
+      },
+      "architect": {
+        "build": {
+          "builder": "@angular-devkit/build-angular:browser",
+          "options": {
+            "outputPath": "dist/apps/component-testing",
+            "index": "apps/component-testing/src/index.html",
+            "main": "apps/component-testing/src/main.ts",
+            "polyfills": "apps/component-testing/src/polyfills.ts",
+            "tsConfig": "apps/component-testing/tsconfig.app.json",
+            "assets": [
+              "apps/component-testing/src/favicon.ico",
+              "apps/component-testing/src/assets"
+            ],
+            "styles": [
+              "apps/component-testing/src/styles.scss"
+            ],
+            "scripts": [],
+            "es5BrowserSupport": true
+          },
+          "configurations": {
+            "production": {
+              "fileReplacements": [
+                {
+                  "replace": "apps/component-testing/src/environments/environment.ts",
+                  "with": "apps/component-testing/src/environments/environment.prod.ts"
+                }
+              ],
+              "optimization": true,
+              "outputHashing": "all",
+              "sourceMap": false,
+              "extractCss": true,
+              "namedChunks": false,
+              "aot": true,
+              "extractLicenses": true,
+              "vendorChunk": false,
+              "buildOptimizer": true,
+              "budgets": [
+                {
+                  "type": "initial",
+                  "maximumWarning": "2mb",
+                  "maximumError": "5mb"
+                }
+              ]
+            }
+          }
+        },
+        "serve": {
+          "builder": "@angular-devkit/build-angular:dev-server",
+          "options": {
+            "browserTarget": "component-testing:build"
+          },
+          "configurations": {
+            "production": {
+              "browserTarget": "component-testing:build:production"
+            }
+          }
+        },
+        "extract-i18n": {
+          "builder": "@angular-devkit/build-angular:extract-i18n",
+          "options": {
+            "browserTarget": "component-testing:build"
+          }
+        },
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": [
+              "apps/component-testing/tsconfig.app.json",
+              "apps/component-testing/tsconfig.spec.json"
+            ],
+            "exclude": [
+              "**/node_modules/**"
+            ]
+          }
+        },
+        "test": {
+          "builder": "@angular-devkit/build-angular:karma",
+          "options": {
+            "main": "apps/component-testing/src/test.ts",
+            "tsConfig": "apps/component-testing/tsconfig.spec.json",
+            "karmaConfig": "apps/component-testing/karma.conf.js",
+            "polyfills": "apps/component-testing/src/polyfills.ts",
+            "styles": [],
+            "scripts": [],
+            "assets": []
+          }
+        }
+      }
+    },
+    "component-testing-e2e": {
+      "root": "apps/component-testing-e2e",
+      "projectType": "application",
+      "prefix": "",
+      "architect": {
+        "e2e": {
+          "builder": "@angular-devkit/build-angular:protractor",
+          "options": {
+            "protractorConfig": "apps/component-testing-e2e/protractor.conf.js",
+            "devServerTarget": "component-testing:serve"
+          },
+          "configurations": {
+            "production": {
+              "devServerTarget": "component-testing:serve:production"
+            }
+          }
+        },
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": "apps/component-testing-e2e/tsconfig.e2e.json",
+            "exclude": [
+              "**/node_modules/**"
+            ]
+          }
+        }
+      }
     }
   },
   "cli": {
@@ -584,5 +730,5 @@
       "style": "scss"
     }
   },
-  "defaultProject": "fire-base-animation"
+  "defaultProject": "component-testing"
 }
