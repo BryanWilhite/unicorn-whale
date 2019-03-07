@@ -33,7 +33,7 @@ describe('GitHubApiService', () => {
     expect(service).toBeTruthy();
   });
 
-  describe('#getUsers', () => {
+  describe('service call: getUsers', () => {
     it('should return an Observable<User[]>', () => {
       const dummyUsers: User[] = [new User(0, 'John'), new User(1, 'Doe')];
 
@@ -52,9 +52,22 @@ describe('GitHubApiService', () => {
       // test expectations with dummy data:
       testRequest.flush(dummyUsers);
     });
+
+    it('should call endpoint only once with the expected HTTP method', () => {
+      // service call will be deferred/intercepted
+      // by mock version of HttpClient in HttpClientTestingModule:
+      service.getUsers().subscribe();
+
+      // setup expectations: one call for specified URI and GET method:
+      const testRequest: TestRequest = mockBackEnd.expectOne(GitHubApiService.getUsersUri());
+      expect(testRequest.request.method).toBe('GET');
+
+      // test expectations with null invocation:
+      testRequest.flush(null);
+    });
   });
 
-  describe('#search', () => {
+  describe('service call: search', () => {
     const name = 'cironunes';
     const dummyParams = new HttpParams().set('q', name);
 
