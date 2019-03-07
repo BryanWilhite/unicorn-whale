@@ -34,6 +34,19 @@
                 "cwd": "${workspaceFolder}/nx-workspace"
             },
             "problemMatcher": []
+        },
+        {
+            "label": "ng test: test by selected project",
+            "type": "shell",
+            "command": "ng",
+            "args": [
+                "test",
+                "--project=${selectedText}"
+            ],
+            "options": {
+                "cwd": "${workspaceFolder}/nx-workspace"
+            },
+            "problemMatcher": []
         }
     ]
 }
