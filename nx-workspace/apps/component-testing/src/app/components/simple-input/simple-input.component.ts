@@ -6,6 +6,6 @@ import { Component, Input } from '@angular/core';
   styleUrls: ['./simple-input.component.scss']
 })
 export class SimpleInputComponent {
-  @Input() value: boolean;
+  @Input() value = true;
   constructor() {}
 }
