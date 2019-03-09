@@ -1,0 +1,55 @@
+<nx-workspace-menu></nx-workspace-menu>
+<form [formGroup]="myForm" [hidden]="success" (ngSubmit)="submitHandler()">
+  <h4>Email</h4>
+  <input formControlName="email" />
+  <span class="error" *ngIf="email.invalid && email.touched">
+    Your email does not look right
+  </span>
+
+  <div class="phones" formArrayName="phones">
+    <h4 *ngIf="phoneForms.controls.length">Phones</h4>
+    <div
+      *ngFor="let phone of phoneForms.controls; let i = index"
+      [formGroupName]="i"
+    >
+      <input class="small" formControlName="area" />
+      <input class="small" formControlName="prefix" />
+      <input formControlName="line" />
+
+      <button (click)="deletePhone(i)">Delete</button>
+    </div>
+  </div>
+
+  <button (click)="addPhone()">Add Phone Number</button>
+
+  <h4>Password</h4>
+  <input formControlName="password" />
+  <span class="error" *ngIf="password.invalid && password.touched">
+    That password sucks...
+  </span>
+
+  <h4>Age</h4>
+  <input class="small" formControlName="age" />
+  <span class="error" *ngIf="age.errors?.min && age.touched">
+    {{ age.errors.min.actual }} is young to use this app kiddo!
+  </span>
+  <span class="error" *ngIf="age.errors?.max && age.touched">
+    {{ age.errors.max.actual }} is too you old to use this app gramps!
+  </span>
+
+  <button type="submit" [disabled]="myForm.invalid">Let's Do it!</button>
+</form>
+
+<div *ngIf="success">
+    Yay! We received your submission
+</div>
+
+<h2>additional resources:</h2>
+<ul>
+  <li>
+    📃“<a
+      href="https://angularfirebase.com/lessons/basics-reactive-forms-in-angular/"
+      >Angular Reactive Forms Basics Guide</a
+    >” by Jeff Delaney
+  </li>
+</ul>
