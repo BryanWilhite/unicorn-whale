@@ -1,5 +1,11 @@
 import { Component, OnInit } from '@angular/core';
-import { FormGroup, FormBuilder, FormArray, Validators } from '@angular/forms';
+import {
+  FormGroup,
+  FormBuilder,
+  FormArray,
+  Validators,
+  AbstractControl
+} from '@angular/forms';
 
 @Component({
   selector: 'nx-workspace-reactive-forms',
@@ -35,23 +41,23 @@ export class ReactiveFormsComponent implements OnInit {
     });
   }
 
-  get email() {
+  get email(): AbstractControl {
     return this.myForm.get('email');
   }
 
-  get phoneForms() {
+  get phoneForms(): FormArray {
     return this.myForm.get('phones') as FormArray;
   }
 
-  get password() {
+  get password(): AbstractControl {
     return this.myForm.get('password');
   }
 
-  get age() {
+  get age(): AbstractControl {
     return this.myForm.get('age');
   }
 
-  addPhone() {
+  addPhone(): void {
     const phone: FormGroup = this.fb.group({
       area: [],
       prefix: [],
@@ -59,6 +65,20 @@ export class ReactiveFormsComponent implements OnInit {
     });
 
     this.phoneForms.push(phone);
+  }
+
+  getPhone(
+    i: number,
+    propertyName: 'area' | 'prefix' | 'line'
+  ): AbstractControl | null {
+    if (!this.phoneForms || !this.phoneForms.length) {
+      return null;
+    }
+    if (this.phoneForms.length < i - 1) {
+      return null;
+    }
+    const group = this.phoneForms.at(i) as FormGroup;
+    return group.get(propertyName);
   }
 
   deletePhone(i: number) {
