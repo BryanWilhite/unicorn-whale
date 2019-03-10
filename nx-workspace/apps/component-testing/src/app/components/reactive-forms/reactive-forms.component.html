@@ -1,7 +1,7 @@
 <nx-workspace-menu></nx-workspace-menu>
 <form [formGroup]="myForm" [hidden]="success" (ngSubmit)="submitHandler()">
   <h4>Email</h4>
-  <input formControlName="email" />
+  <input formControlName="email" type="email" />
   <span class="error" *ngIf="email.invalid && email.touched">
     Your email does not look right
   </span>
@@ -16,20 +16,23 @@
       <input class="small" formControlName="prefix" />
       <input formControlName="line" />
 
-      <button (click)="deletePhone(i)">Delete</button>
+      <button type="button" (click)="deletePhone(i)">Delete</button>
     </div>
   </div>
 
-  <button (click)="addPhone()">Add Phone Number</button>
+  <button type="button" (click)="addPhone()">Add Phone Number</button>
 
   <h4>Password</h4>
-  <input formControlName="password" />
+  <input formControlName="password" type="password" />
   <span class="error" *ngIf="password.invalid && password.touched">
     That password sucks...
   </span>
 
   <h4>Age</h4>
-  <input class="small" formControlName="age" />
+  <input class="small" formControlName="age" type="number" />
+  <span class="error" *ngIf="age.invalid && age.touched">
+    Do enter a number!
+  </span>
   <span class="error" *ngIf="age.errors?.min && age.touched">
     {{ age.errors.min.actual }} is young to use this app kiddo!
   </span>

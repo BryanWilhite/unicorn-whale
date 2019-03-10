@@ -10,6 +10,7 @@ import { MenuComponent } from './components/menu/menu.component';
 import { DetectChangesComponent } from './components/detect-changes/detect-changes.component';
 import { SimpleInputComponent } from './components/simple-input/simple-input.component';
 import { ReactiveFormsComponent } from './components/reactive-forms/reactive-forms.component';
+import { TemplateFormsComponent } from './components/template-forms/template-forms.component';
 
 @NgModule({
   imports: [BrowserModule, FormsModule, ReactiveFormsModule, RoutingModule],
@@ -19,7 +20,8 @@ import { ReactiveFormsComponent } from './components/reactive-forms/reactive-for
     MenuComponent,
     SimpleInputComponent,
     DetectChangesComponent,
-    ReactiveFormsComponent
+    ReactiveFormsComponent,
+    TemplateFormsComponent
   ],
   providers: [],
   bootstrap: [AppComponent]

@@ -1,0 +1,42 @@
+<nx-workspace-menu></nx-workspace-menu>
+<form [hidden]="myFormData.success" (ngSubmit)="submitHandler()">
+  <h4>Email</h4>
+  <input required email type="email" name="email" #email="ngModel" [(ngModel)]="myFormData.email" />
+  <span class="error" *ngIf="email.invalid && email.touched">
+    Your email does not look right
+  </span>
+
+  <div class="phones">
+    <h4 *ngIf="myFormData?.phones.length">Phones</h4>
+    <div *ngFor="let phone of myFormData?.phones; let i = index">
+      <input class="small" name="phone-area" [(ngModel)]="phone.area" />
+      <input class="small" name="phone-prefix" [(ngModel)]="phone.prefix" />
+      <input name="phone-line" [(ngModel)]="phone.line" />
+
+      <button type="button" (click)="deletePhone(i)">Delete</button>
+    </div>
+  </div>
+
+  <button type="button" (click)="addPhone()">Add Phone Number</button>
+
+  <h4>Password</h4>
+  <input required type="password" name="password" #password="ngModel" [(ngModel)]="myFormData.password" />
+  <span class="error" *ngIf="password.invalid && password.touched">
+    That password sucks...
+  </span>
+
+  <h4>Age</h4>
+  <input required type="password" name="age" [(ngModel)]="myFormData.age" />
+
+  <button type="submit">Let's Do it!</button>
+</form>
+
+<div *ngIf="myFormData.success">Yay! We received your submission</div>
+
+<h2>additional resources:</h2>
+<ul>
+  <li>📃<a href="https://angular.io/guide/forms">Angular Guide: Template-Driven Forms</a></li>
+</ul>
+<ul>
+  <li>📃<a href="https://angular.io/guide/form-validation#template-driven-validation">Angular Guide: Template-driven validation</a></li>
+</ul>
