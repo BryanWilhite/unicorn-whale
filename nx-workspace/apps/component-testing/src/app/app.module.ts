@@ -11,6 +11,7 @@ import { DetectChangesComponent } from './components/detect-changes/detect-chang
 import { SimpleInputComponent } from './components/simple-input/simple-input.component';
 import { ReactiveFormsComponent } from './components/reactive-forms/reactive-forms.component';
 import { TemplateFormsComponent } from './components/template-forms/template-forms.component';
+import { MinValidator } from './components/template-forms/directives/min.directive';
 
 @NgModule({
   imports: [BrowserModule, FormsModule, ReactiveFormsModule, RoutingModule],
@@ -21,7 +22,8 @@ import { TemplateFormsComponent } from './components/template-forms/template-for
     SimpleInputComponent,
     DetectChangesComponent,
     ReactiveFormsComponent,
-    TemplateFormsComponent
+    TemplateFormsComponent,
+    MinValidator
   ],
   providers: [],
   bootstrap: [AppComponent]

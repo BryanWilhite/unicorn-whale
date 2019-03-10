@@ -8,6 +8,7 @@ import { Component, OnInit } from '@angular/core';
 export class TemplateFormsComponent implements OnInit {
 
   myFormData: MyFormData;
+  passwordPattern = '^(?=.*[0-9])(?=.*[a-zA-Z])([a-zA-Z0-9]+)$';
 
   constructor() {
     this.myFormData = {

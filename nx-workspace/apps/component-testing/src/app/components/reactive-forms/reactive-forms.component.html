@@ -34,10 +34,10 @@
     Do enter a number!
   </span>
   <span class="error" *ngIf="age.errors?.min && age.touched">
-    {{ age.errors.min.actual }} is young to use this app kiddo!
+    {{ age.errors.min.actual }} is too young to use this app kiddo!
   </span>
   <span class="error" *ngIf="age.errors?.max && age.touched">
-    {{ age.errors.max.actual }} is too you old to use this app gramps!
+    {{ age.errors.max.actual }} is too old to use this app gramps!
   </span>
 
   <button type="submit" [disabled]="myForm.invalid">Let's Do it!</button>
