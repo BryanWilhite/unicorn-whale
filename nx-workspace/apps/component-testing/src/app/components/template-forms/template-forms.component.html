@@ -26,8 +26,8 @@
   </span>
 
   <h4>Age</h4>
-  <input class="small" required nx-workspace-min="18" max="65" type="number" name="age" #age="ngModel" [(ngModel)]="myFormData.age" />
-  <span class="error" *ngIf="age.invalid && age.touched">
+  <input class="small" required min="18" max="65" type="number" name="age" #age="ngModel" [(ngModel)]="myFormData.age" />
+  <span class="error" *ngIf="age.invalid && age.touched && !age.errors?.max && !age.errors?.min">
     Do enter a number!
   </span>
   <span class="error" *ngIf="age.errors?.min && age.touched">

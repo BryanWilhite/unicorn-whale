@@ -10,11 +10,18 @@ import { MenuComponent } from './components/menu/menu.component';
 import { DetectChangesComponent } from './components/detect-changes/detect-changes.component';
 import { SimpleInputComponent } from './components/simple-input/simple-input.component';
 import { ReactiveFormsComponent } from './components/reactive-forms/reactive-forms.component';
-import { TemplateFormsComponent } from './components/template-forms/template-forms.component';
+
+import { MaxValidator } from './components/template-forms/directives/max.directive';
 import { MinValidator } from './components/template-forms/directives/min.directive';
+import { TemplateFormsComponent } from './components/template-forms/template-forms.component';
 
 @NgModule({
-  imports: [BrowserModule, FormsModule, ReactiveFormsModule, RoutingModule],
+  imports: [
+    BrowserModule,
+    FormsModule,
+    ReactiveFormsModule,
+    RoutingModule
+  ],
   declarations: [
     AppComponent,
     IndexComponent,
@@ -22,10 +29,11 @@ import { MinValidator } from './components/template-forms/directives/min.directi
     SimpleInputComponent,
     DetectChangesComponent,
     ReactiveFormsComponent,
-    TemplateFormsComponent,
-    MinValidator
+    MaxValidator,
+    MinValidator,
+    TemplateFormsComponent
   ],
   providers: [],
   bootstrap: [AppComponent]
 })
-export class AppModule {}
+export class AppModule { }
