@@ -1,5 +1,5 @@
 import { NO_ERRORS_SCHEMA } from '@angular/core';
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { FormsModule } from '@angular/forms';
 import { By } from '@angular/platform-browser';
 
@@ -9,13 +9,15 @@ describe('TemplateFormsComponent', () => {
   let component: TemplateFormsComponent;
   let fixture: ComponentFixture<TemplateFormsComponent>;
 
-  beforeEach(async(() => {
-    TestBed.configureTestingModule({
+  beforeEach(async () => {
+    const meta = {
       imports: [FormsModule],
       declarations: [TemplateFormsComponent],
       schemas: [NO_ERRORS_SCHEMA]
-    }).compileComponents();
-  }));
+    };
+
+    await TestBed.configureTestingModule(meta).compileComponents();
+  });
 
   beforeEach(() => {
     fixture = TestBed.createComponent(TemplateFormsComponent);
@@ -28,26 +30,26 @@ describe('TemplateFormsComponent', () => {
   });
 
   describe('form', () => {
-    it('should not be valid by default', async(() => {
+    it('should not be valid by default', async () => {
       expect(component.myForm).toBeTruthy('The form is expected to be truthy.');
 
-      fixture.whenStable().then(() => {
-        expect(component.myForm.valid).toEqual(false);
-      });
-    }));
+      await fixture.whenStable();
 
-    it('should be valid with specified data and successfully submit', async(() => {
+      expect(component.myForm.valid).toEqual(false);
+    });
+
+    it('should be valid with specified data and successfully submit', async () => {
       component.myFormData.email = 'bill.gates@microsoft.com';
       fixture.detectChanges();
-      fixture.whenStable().then(() => {
-        expect(component.myForm.controls.email).toBeTruthy(
-          'The expected form control is not here.'
-        );
-        expect(component.myForm.controls.email.valid).toBe(
-          true,
-          'The entered form data [email] is not valid.'
-        );
-      });
+      await fixture.whenStable();
+
+      expect(component.myForm.controls.email).toBeTruthy(
+        'The expected form control is not here.'
+      );
+      expect(component.myForm.controls.email.valid).toBe(
+        true,
+        'The entered form data [email] is not valid.'
+      );
 
       component.addPhone();
       expect(component.myFormData.phones.length).toEqual(1);
@@ -58,51 +60,46 @@ describe('TemplateFormsComponent', () => {
 
       component.myFormData.password = 'QWqJitwyY7dtJqLBF7Bh';
       fixture.detectChanges();
-      fixture.whenStable().then(() => {
-        expect(component.myForm.controls.password).toBeTruthy(
-          'The expected form control is not here.'
-        );
-        expect(component.myForm.controls.password.valid).toBe(
-          true,
-          'The entered form data [password] is not valid.'
-        );
-      });
+      await fixture.whenStable();
+
+      expect(component.myForm.controls.password).toBeTruthy(
+        'The expected form control is not here.'
+      );
+      expect(component.myForm.controls.password.valid).toBe(
+        true,
+        'The entered form data [password] is not valid.'
+      );
 
       component.myFormData.age = 39;
       fixture.detectChanges();
-      fixture
-        .whenStable()
-        .then(() => {
-          expect(component.myForm.controls.age).toBeTruthy(
-            'The expected form control is not here.'
-          );
-          expect(component.myForm.controls.age.valid).toBe(
-            true,
-            'The entered form data [age] is not valid.'
-          );
-        })
-        .then(() => {
-          const button = fixture.debugElement.query(
-            By.css("button[type='submit']")
-          );
-          expect(button).toBeTruthy(
-            'The expected form submit button is not here.'
-          );
-          expect(button.nativeElement.disabled).toBe(
-            false,
-            'The button is expected to be enabled.'
-          );
+      await fixture.whenStable();
 
-          spyOn(component, 'submitHandler').and.callThrough();
-          button.nativeElement.click();
+      expect(component.myForm.controls.age).toBeTruthy(
+        'The expected form control is not here.'
+      );
+      expect(component.myForm.controls.age.valid).toBe(
+        true,
+        'The entered form data [age] is not valid.'
+      );
 
-          expect(component.submitHandler).toHaveBeenCalledTimes(1);
+      const button = fixture.debugElement.query(
+        By.css("button[type='submit']")
+      );
+      expect(button).toBeTruthy('The expected form submit button is not here.');
+      expect(button.nativeElement.disabled).toBe(
+        false,
+        'The button is expected to be enabled.'
+      );
 
-          expect(component.myFormData.success).toBe(
-            true,
-            'The expected form submission success is not here.'
-          );
-        });
-    }));
+      spyOn(component, 'submitHandler').and.callThrough();
+      button.nativeElement.click();
+
+      expect(component.submitHandler).toHaveBeenCalledTimes(1);
+
+      expect(component.myFormData.success).toBe(
+        true,
+        'The expected form submission success is not here.'
+      );
+    });
   });
 });

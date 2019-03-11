@@ -1,5 +1,5 @@
 import { NO_ERRORS_SCHEMA } from '@angular/core';
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { ReactiveFormsModule } from '@angular/forms';
 import { ReactiveFormsComponent } from './reactive-forms.component';
@@ -9,13 +9,15 @@ describe(ReactiveFormsComponent.name, () => {
   let component: ReactiveFormsComponent;
   let fixture: ComponentFixture<ReactiveFormsComponent>;
 
-  beforeEach(async(() => {
-    TestBed.configureTestingModule({
+  beforeEach(async () => {
+    const meta = {
       imports: [ReactiveFormsModule],
       declarations: [ReactiveFormsComponent],
       schemas: [NO_ERRORS_SCHEMA]
-    }).compileComponents();
-  }));
+    };
+
+    await TestBed.configureTestingModule(meta).compileComponents();
+  });
 
   beforeEach(() => {
     fixture = TestBed.createComponent(ReactiveFormsComponent);
@@ -79,7 +81,10 @@ describe(ReactiveFormsComponent.name, () => {
 
       expect(component.submitHandler).toHaveBeenCalledTimes(1);
 
-      expect(component.success).toBe(true, 'The expected form submission success is not here.');
+      expect(component.success).toBe(
+        true,
+        'The expected form submission success is not here.'
+      );
     });
   });
 });
