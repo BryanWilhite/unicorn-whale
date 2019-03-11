@@ -36,6 +36,7 @@ Testing a template form requires synchronous code while reactive-form tests can 
 - “[Real World Angular–Part 9.2: Even More Unit Tests [Testing Reactive Forms]](https://blog.realworldfullstack.io/real-world-angular-part-9-2-even-more-unit-tests-f903df40530a)” by Akshay Nihalaney
 - [Angular Guide: Template-Driven Forms](https://angular.io/guide/forms)
 - [Angular Guide: Template-driven validation](https://angular.io/guide/form-validation#template-driven-validation)
+- [Angular Guide: Two-way binding ( `[(...)]` )](https://angular.io/guide/template-syntax#two-way-binding---)
 
 ## simple `input`: testing a checkbox
 
