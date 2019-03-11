@@ -1,5 +1,5 @@
 <nx-workspace-menu></nx-workspace-menu>
-<form [hidden]="myFormData.success" (ngSubmit)="submitHandler()">
+<form #myForm="ngForm" [hidden]="myFormData.success" (ngSubmit)="submitHandler()">
   <h4>Email</h4>
   <input required email type="email" name="email" #email="ngModel" [(ngModel)]="myFormData.email" />
   <span class="error" *ngIf="email.invalid && email.touched">
@@ -20,7 +20,7 @@
   <button type="button" (click)="addPhone()">Add Phone Number</button>
 
   <h4>Password</h4>
-  <input required pattern="passwordPattern" type="password" name="password" #password="ngModel" [(ngModel)]="myFormData.password" />
+  <input required pattern="^(?=.*[0-9])(?=.*[a-zA-Z])([a-zA-Z0-9]+)$" type="password" name="password" #password="ngModel" [(ngModel)]="myFormData.password" />
   <span class="error" *ngIf="password.invalid && password.touched">
     That password sucks...
   </span>

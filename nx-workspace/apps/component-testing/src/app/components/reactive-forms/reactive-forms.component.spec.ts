@@ -47,6 +47,7 @@ describe(ReactiveFormsComponent.name, () => {
       phonePrefix.setValue('555');
       const phoneLine = component.getPhone(0, 'line');
       phoneLine.setValue('1234');
+      // TODO: verify that the UI displays on phone.
 
       component.password.setValue('QWqJitwyY7dtJqLBF7Bh');
       expect(component.password.valid).toBe(

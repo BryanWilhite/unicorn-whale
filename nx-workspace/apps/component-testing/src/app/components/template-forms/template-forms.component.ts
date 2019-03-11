@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
+import { NgForm } from '@angular/forms';
 
 @Component({
   selector: 'nx-workspace-template-forms',
@@ -6,9 +7,8 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./template-forms.component.scss']
 })
 export class TemplateFormsComponent implements OnInit {
-
+  @ViewChild(NgForm) myForm: NgForm;
   myFormData: MyFormData;
-  passwordPattern = '^(?=.*[0-9])(?=.*[a-zA-Z])([a-zA-Z0-9]+)$';
 
   constructor() {
     this.myFormData = {
@@ -17,11 +17,10 @@ export class TemplateFormsComponent implements OnInit {
       phones: [],
       password: null,
       age: null
-    }
+    };
   }
 
-  ngOnInit() {
-  }
+  ngOnInit() {}
 
   addPhone(): void {
     const phone: Phone = {
@@ -34,15 +33,18 @@ export class TemplateFormsComponent implements OnInit {
   }
 
   deletePhone(i: number): void {
-    if (!this.myFormData.phones) { return; }
-    if (!this.myFormData.phones.length) { return; }
+    if (!this.myFormData.phones) {
+      return;
+    }
+    if (!this.myFormData.phones.length) {
+      return;
+    }
     this.myFormData.phones.splice(i, 1);
   }
 
   submitHandler(): void {
     this.myFormData.success = true;
   }
-
 }
 
 export class Phone {
