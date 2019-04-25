@@ -26,7 +26,9 @@
               "apps/http-client-testing/src/favicon.ico",
               "apps/http-client-testing/src/assets"
             ],
-            "styles": ["apps/http-client-testing/src/styles.scss"],
+            "styles": [
+              "apps/http-client-testing/src/styles.scss"
+            ],
             "scripts": [],
             "es5BrowserSupport": true
           },
@@ -81,7 +83,9 @@
               "apps/http-client-testing/tsconfig.app.json",
               "apps/http-client-testing/tsconfig.spec.json"
             ],
-            "exclude": ["**/node_modules/**"]
+            "exclude": [
+              "**/node_modules/**"
+            ]
           }
         },
         "test": {
@@ -119,7 +123,9 @@
           "builder": "@angular-devkit/build-angular:tslint",
           "options": {
             "tsConfig": "apps/http-client-testing-e2e/tsconfig.e2e.json",
-            "exclude": ["**/node_modules/**"]
+            "exclude": [
+              "**/node_modules/**"
+            ]
           }
         }
       }
@@ -166,7 +172,9 @@
               "apps/fire-base-animation/src/favicon.ico",
               "apps/fire-base-animation/src/assets"
             ],
-            "styles": ["apps/fire-base-animation/src/styles.scss"],
+            "styles": [
+              "apps/fire-base-animation/src/styles.scss"
+            ],
             "scripts": [],
             "es5BrowserSupport": true
           },
@@ -221,7 +229,9 @@
               "apps/fire-base-animation/tsconfig.app.json",
               "apps/fire-base-animation/tsconfig.spec.json"
             ],
-            "exclude": ["**/node_modules/**"]
+            "exclude": [
+              "**/node_modules/**"
+            ]
           }
         },
         "test": {
@@ -259,7 +269,9 @@
           "builder": "@angular-devkit/build-angular:tslint",
           "options": {
             "tsConfig": "apps/fire-base-animation-e2e/tsconfig.e2e.json",
-            "exclude": ["**/node_modules/**"]
+            "exclude": [
+              "**/node_modules/**"
+            ]
           }
         }
       }
@@ -306,7 +318,9 @@
               "apps/responsive-thumbnails/src/favicon.ico",
               "apps/responsive-thumbnails/src/assets"
             ],
-            "styles": ["apps/responsive-thumbnails/src/styles.scss"],
+            "styles": [
+              "apps/responsive-thumbnails/src/styles.scss"
+            ],
             "scripts": [],
             "es5BrowserSupport": true
           },
@@ -361,7 +375,9 @@
               "apps/responsive-thumbnails/tsconfig.app.json",
               "apps/responsive-thumbnails/tsconfig.spec.json"
             ],
-            "exclude": ["**/node_modules/**"]
+            "exclude": [
+              "**/node_modules/**"
+            ]
           }
         },
         "test": {
@@ -399,7 +415,9 @@
           "builder": "@angular-devkit/build-angular:tslint",
           "options": {
             "tsConfig": "apps/responsive-thumbnails-e2e/tsconfig.e2e.json",
-            "exclude": ["**/node_modules/**"]
+            "exclude": [
+              "**/node_modules/**"
+            ]
           }
         }
       }
@@ -446,7 +464,9 @@
               "apps/year-of-moo-animation/src/favicon.ico",
               "apps/year-of-moo-animation/src/assets"
             ],
-            "styles": ["apps/year-of-moo-animation/src/styles.scss"],
+            "styles": [
+              "apps/year-of-moo-animation/src/styles.scss"
+            ],
             "scripts": [],
             "es5BrowserSupport": true
           },
@@ -501,7 +521,9 @@
               "apps/year-of-moo-animation/tsconfig.app.json",
               "apps/year-of-moo-animation/tsconfig.spec.json"
             ],
-            "exclude": ["**/node_modules/**"]
+            "exclude": [
+              "**/node_modules/**"
+            ]
           }
         },
         "test": {
@@ -539,7 +561,9 @@
           "builder": "@angular-devkit/build-angular:tslint",
           "options": {
             "tsConfig": "apps/year-of-moo-animation-e2e/tsconfig.e2e.json",
-            "exclude": ["**/node_modules/**"]
+            "exclude": [
+              "**/node_modules/**"
+            ]
           }
         }
       }
@@ -586,7 +610,9 @@
               "apps/component-testing/src/favicon.ico",
               "apps/component-testing/src/assets"
             ],
-            "styles": ["apps/component-testing/src/styles.scss"],
+            "styles": [
+              "apps/component-testing/src/styles.scss"
+            ],
             "scripts": [],
             "es5BrowserSupport": true
           },
@@ -641,7 +667,9 @@
               "apps/component-testing/tsconfig.app.json",
               "apps/component-testing/tsconfig.spec.json"
             ],
-            "exclude": ["**/node_modules/**"]
+            "exclude": [
+              "**/node_modules/**"
+            ]
           }
         },
         "test": {
@@ -679,7 +707,9 @@
           "builder": "@angular-devkit/build-angular:tslint",
           "options": {
             "tsConfig": "apps/component-testing-e2e/tsconfig.e2e.json",
-            "exclude": ["**/node_modules/**"]
+            "exclude": [
+              "**/node_modules/**"
+            ]
           }
         }
       }
@@ -726,7 +756,9 @@
               "apps/seo-splash/src/favicon.ico",
               "apps/seo-splash/src/assets"
             ],
-            "styles": ["apps/seo-splash/src/styles.scss"],
+            "styles": [
+              "apps/seo-splash/src/styles.scss"
+            ],
             "scripts": [],
             "es5BrowserSupport": true
           },
@@ -781,7 +813,9 @@
               "apps/seo-splash/tsconfig.app.json",
               "apps/seo-splash/tsconfig.spec.json"
             ],
-            "exclude": ["**/node_modules/**"]
+            "exclude": [
+              "**/node_modules/**"
+            ]
           }
         },
         "test": {
@@ -819,7 +853,9 @@
           "builder": "@angular-devkit/build-angular:tslint",
           "options": {
             "tsConfig": "apps/seo-splash-e2e/tsconfig.e2e.json",
-            "exclude": ["**/node_modules/**"]
+            "exclude": [
+              "**/node_modules/**"
+            ]
           }
         }
       }
@@ -840,5 +876,5 @@
       "style": "scss"
     }
   },
-  "defaultProject": "component-testing"
+  "defaultProject": "seo-splash"
 }

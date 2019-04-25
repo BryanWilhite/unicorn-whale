@@ -1,14 +1,44 @@
 <!DOCTYPE html>
 <html lang="en">
+  <!-- https://www.advancedwebranking.com/blog/meta-tags-important-in-seo/ -->
+
   <head>
-    <meta charset="utf-8" />
-    <title>SeoSplash</title>
+    <title>Songhay Studio Seo Splash</title>
+
     <base href="/" />
 
+    <meta charset="utf-8" />
+    <meta name="author" content="@BryanWilhite" />
+    <!-- <meta name="generator" content="SonghaySystem.com" /> “Useless tag.” -->
+    <!-- <meta name="keywords" content="SEO,splash" /> Google does not use the keywords Meta tag in web ranking. -->
+    <meta name="description" content="This is a meta description sample for the SEO splash page. We can add up to 160 characters. Add your targeted keywords in descriptions." />
+    <meta name="robots" content="index, follow" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <link rel="canonical" href="http://songhaysystem.com/" />
+    <!--
+      By implementing the Canonical tag in the code,
+      we are telling search engines that this URL is the main page
+      and avoid indexing other duplicate page URLs.
+    -->
+
     <link rel="icon" type="image/x-icon" href="favicon.ico" />
+    <link rel="stylesheet" href="https://unpkg.com/material-components-web@latest/dist/material-components-web.min.css">
+
   </head>
+
   <body>
+    <main>
+      <div class="mdc-elevation--z5">
+        <h1>Songhay Studio Seo Splash</h1>
+        <div class="lds-ripple"><div></div><div></div></div>
+      </div>
+    </main>
     <nx-workspace-root></nx-workspace-root>
+    <footer>
+      <!-- Every site puts their copyright in the footer, so you don’t need a separate [meta] tag. -->
+      <span class="copyright">© Bryan D. Wilhite 2018</span>
+    </footer>
   </body>
+
 </html>
