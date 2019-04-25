@@ -26,9 +26,7 @@
               "apps/http-client-testing/src/favicon.ico",
               "apps/http-client-testing/src/assets"
             ],
-            "styles": [
-              "apps/http-client-testing/src/styles.scss"
-            ],
+            "styles": ["apps/http-client-testing/src/styles.scss"],
             "scripts": [],
             "es5BrowserSupport": true
           },
@@ -83,9 +81,7 @@
               "apps/http-client-testing/tsconfig.app.json",
               "apps/http-client-testing/tsconfig.spec.json"
             ],
-            "exclude": [
-              "**/node_modules/**"
-            ]
+            "exclude": ["**/node_modules/**"]
           }
         },
         "test": {
@@ -123,9 +119,7 @@
           "builder": "@angular-devkit/build-angular:tslint",
           "options": {
             "tsConfig": "apps/http-client-testing-e2e/tsconfig.e2e.json",
-            "exclude": [
-              "**/node_modules/**"
-            ]
+            "exclude": ["**/node_modules/**"]
           }
         }
       }
@@ -172,9 +166,7 @@
               "apps/fire-base-animation/src/favicon.ico",
               "apps/fire-base-animation/src/assets"
             ],
-            "styles": [
-              "apps/fire-base-animation/src/styles.scss"
-            ],
+            "styles": ["apps/fire-base-animation/src/styles.scss"],
             "scripts": [],
             "es5BrowserSupport": true
           },
@@ -229,9 +221,7 @@
               "apps/fire-base-animation/tsconfig.app.json",
               "apps/fire-base-animation/tsconfig.spec.json"
             ],
-            "exclude": [
-              "**/node_modules/**"
-            ]
+            "exclude": ["**/node_modules/**"]
           }
         },
         "test": {
@@ -269,9 +259,7 @@
           "builder": "@angular-devkit/build-angular:tslint",
           "options": {
             "tsConfig": "apps/fire-base-animation-e2e/tsconfig.e2e.json",
-            "exclude": [
-              "**/node_modules/**"
-            ]
+            "exclude": ["**/node_modules/**"]
           }
         }
       }
@@ -318,9 +306,7 @@
               "apps/responsive-thumbnails/src/favicon.ico",
               "apps/responsive-thumbnails/src/assets"
             ],
-            "styles": [
-              "apps/responsive-thumbnails/src/styles.scss"
-            ],
+            "styles": ["apps/responsive-thumbnails/src/styles.scss"],
             "scripts": [],
             "es5BrowserSupport": true
           },
@@ -375,9 +361,7 @@
               "apps/responsive-thumbnails/tsconfig.app.json",
               "apps/responsive-thumbnails/tsconfig.spec.json"
             ],
-            "exclude": [
-              "**/node_modules/**"
-            ]
+            "exclude": ["**/node_modules/**"]
           }
         },
         "test": {
@@ -415,9 +399,7 @@
           "builder": "@angular-devkit/build-angular:tslint",
           "options": {
             "tsConfig": "apps/responsive-thumbnails-e2e/tsconfig.e2e.json",
-            "exclude": [
-              "**/node_modules/**"
-            ]
+            "exclude": ["**/node_modules/**"]
           }
         }
       }
@@ -464,9 +446,7 @@
               "apps/year-of-moo-animation/src/favicon.ico",
               "apps/year-of-moo-animation/src/assets"
             ],
-            "styles": [
-              "apps/year-of-moo-animation/src/styles.scss"
-            ],
+            "styles": ["apps/year-of-moo-animation/src/styles.scss"],
             "scripts": [],
             "es5BrowserSupport": true
           },
@@ -521,9 +501,7 @@
               "apps/year-of-moo-animation/tsconfig.app.json",
               "apps/year-of-moo-animation/tsconfig.spec.json"
             ],
-            "exclude": [
-              "**/node_modules/**"
-            ]
+            "exclude": ["**/node_modules/**"]
           }
         },
         "test": {
@@ -561,9 +539,7 @@
           "builder": "@angular-devkit/build-angular:tslint",
           "options": {
             "tsConfig": "apps/year-of-moo-animation-e2e/tsconfig.e2e.json",
-            "exclude": [
-              "**/node_modules/**"
-            ]
+            "exclude": ["**/node_modules/**"]
           }
         }
       }
@@ -610,9 +586,7 @@
               "apps/component-testing/src/favicon.ico",
               "apps/component-testing/src/assets"
             ],
-            "styles": [
-              "apps/component-testing/src/styles.scss"
-            ],
+            "styles": ["apps/component-testing/src/styles.scss"],
             "scripts": [],
             "es5BrowserSupport": true
           },
@@ -667,9 +641,7 @@
               "apps/component-testing/tsconfig.app.json",
               "apps/component-testing/tsconfig.spec.json"
             ],
-            "exclude": [
-              "**/node_modules/**"
-            ]
+            "exclude": ["**/node_modules/**"]
           }
         },
         "test": {
@@ -707,9 +679,147 @@
           "builder": "@angular-devkit/build-angular:tslint",
           "options": {
             "tsConfig": "apps/component-testing-e2e/tsconfig.e2e.json",
-            "exclude": [
-              "**/node_modules/**"
-            ]
+            "exclude": ["**/node_modules/**"]
+          }
+        }
+      }
+    },
+    "seo-splash": {
+      "root": "apps/seo-splash/",
+      "sourceRoot": "apps/seo-splash/src",
+      "projectType": "application",
+      "prefix": "nx-workspace",
+      "schematics": {
+        "@nrwl/schematics:class": {
+          "skipTests": true
+        },
+        "@nrwl/schematics:component": {
+          "style": "scss",
+          "skipTests": true
+        },
+        "@nrwl/schematics:directive": {
+          "skipTests": true
+        },
+        "@nrwl/schematics:guard": {
+          "skipTests": true
+        },
+        "@nrwl/schematics:module": {
+          "skipTests": true
+        },
+        "@nrwl/schematics:pipe": {
+          "skipTests": true
+        },
+        "@nrwl/schematics:service": {
+          "skipTests": true
+        }
+      },
+      "architect": {
+        "build": {
+          "builder": "@angular-devkit/build-angular:browser",
+          "options": {
+            "outputPath": "dist/apps/seo-splash",
+            "index": "apps/seo-splash/src/index.html",
+            "main": "apps/seo-splash/src/main.ts",
+            "polyfills": "apps/seo-splash/src/polyfills.ts",
+            "tsConfig": "apps/seo-splash/tsconfig.app.json",
+            "assets": [
+              "apps/seo-splash/src/favicon.ico",
+              "apps/seo-splash/src/assets"
+            ],
+            "styles": ["apps/seo-splash/src/styles.scss"],
+            "scripts": [],
+            "es5BrowserSupport": true
+          },
+          "configurations": {
+            "production": {
+              "fileReplacements": [
+                {
+                  "replace": "apps/seo-splash/src/environments/environment.ts",
+                  "with": "apps/seo-splash/src/environments/environment.prod.ts"
+                }
+              ],
+              "optimization": true,
+              "outputHashing": "all",
+              "sourceMap": false,
+              "extractCss": true,
+              "namedChunks": false,
+              "aot": true,
+              "extractLicenses": true,
+              "vendorChunk": false,
+              "buildOptimizer": true,
+              "budgets": [
+                {
+                  "type": "initial",
+                  "maximumWarning": "2mb",
+                  "maximumError": "5mb"
+                }
+              ]
+            }
+          }
+        },
+        "serve": {
+          "builder": "@angular-devkit/build-angular:dev-server",
+          "options": {
+            "browserTarget": "seo-splash:build"
+          },
+          "configurations": {
+            "production": {
+              "browserTarget": "seo-splash:build:production"
+            }
+          }
+        },
+        "extract-i18n": {
+          "builder": "@angular-devkit/build-angular:extract-i18n",
+          "options": {
+            "browserTarget": "seo-splash:build"
+          }
+        },
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": [
+              "apps/seo-splash/tsconfig.app.json",
+              "apps/seo-splash/tsconfig.spec.json"
+            ],
+            "exclude": ["**/node_modules/**"]
+          }
+        },
+        "test": {
+          "builder": "@angular-devkit/build-angular:karma",
+          "options": {
+            "main": "apps/seo-splash/src/test.ts",
+            "tsConfig": "apps/seo-splash/tsconfig.spec.json",
+            "karmaConfig": "apps/seo-splash/karma.conf.js",
+            "polyfills": "apps/seo-splash/src/polyfills.ts",
+            "styles": [],
+            "scripts": [],
+            "assets": []
+          }
+        }
+      }
+    },
+    "seo-splash-e2e": {
+      "root": "apps/seo-splash-e2e",
+      "projectType": "application",
+      "prefix": "",
+      "architect": {
+        "e2e": {
+          "builder": "@angular-devkit/build-angular:protractor",
+          "options": {
+            "protractorConfig": "apps/seo-splash-e2e/protractor.conf.js",
+            "devServerTarget": "seo-splash:serve"
+          },
+          "configurations": {
+            "production": {
+              "devServerTarget": "seo-splash:serve:production"
+            }
+          }
+        },
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": "apps/seo-splash-e2e/tsconfig.e2e.json",
+            "exclude": ["**/node_modules/**"]
           }
         }
       }

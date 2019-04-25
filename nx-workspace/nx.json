@@ -37,6 +37,12 @@
     },
     "component-testing-e2e": {
       "tags": []
+    },
+    "seo-splash": {
+      "tags": []
+    },
+    "seo-splash-e2e": {
+      "tags": []
     }
   }
 }
