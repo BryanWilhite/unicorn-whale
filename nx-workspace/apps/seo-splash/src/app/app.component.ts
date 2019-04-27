@@ -8,9 +8,18 @@ import { Component, AfterViewInit } from '@angular/core';
 export class AppComponent implements AfterViewInit {
   title = 'seo-splash';
 
-  ngAfterViewInit(): void {
+  async ngAfterViewInit(): Promise<void> {
+    const timeout = (ms: number) => {
+      return new Promise(resolve => setTimeout(resolve, ms));
+    };
+
+    await timeout(2000);
+
     const main = Array.from(document.getElementsByTagName('main')).find(i => true) as HTMLMainElement;
     main.classList.add('hidden');
-    setTimeout(() => { main.classList.add('collapsed'); }, 2000);
+
+    await timeout(2000);
+
+    main.classList.add('collapsed');
   }
 }
