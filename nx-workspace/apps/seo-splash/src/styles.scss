@@ -1,13 +1,24 @@
 /* You can add global styles to this file, and also import other style files */
 
 main {
-    margin: 1em auto;
-    max-width: 60%;
-    padding: 0.5em;
-    & > div {
-        padding: 1em;
-    }
     transition: all 2s linear;
+
+    & .mdc-dialog__container {
+        height: 90%;
+        width: 100%;
+        & > .mdc-dialog__surface {
+            background-image: linear-gradient(
+                    rgba(255, 0, 0, 0.45),
+                    rgba(255, 0, 0, 0.45)
+                ),
+                url(http://lorempixel.com/1024/480/);
+            background-position: center center;
+            background-repeat: no-repeat;
+            background-size: cover;
+            height: 60%;
+            width: 60%;
+        }
+    }
 }
 
 footer {
@@ -20,11 +31,11 @@ footer {
 }
 
 .collapsed {
-  display: none;
+    display: none;
 }
 
 .hidden {
-  opacity: 0;
+    opacity: 0;
 }
 
 /* https://loading.io/css/ */

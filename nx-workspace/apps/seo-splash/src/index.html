@@ -30,12 +30,19 @@
 
   <body class="mdc-typography">
     <main>
-      <div class="mdc-elevation--z5">
-        <h1 class="mdc-typography--headline1">Songhay Studio Seo Splash</h1>
-        <div class="lds-ripple">
-          <div></div>
-          <div></div>
+      <div class="mdc-dialog mdc-dialog--open" role="alertdialog" aria-modal="true" aria-labelledby="splash-title" aria-describedby="splash-content">
+        <div class="mdc-dialog__container">
+          <div class="mdc-dialog__surface">
+            <h2 class="mdc-dialog__title" id="splash-title">Songhay Studio Seo Splash</h2>
+            <div class="mdc-dialog__content" id="splash-content">
+              <div class="lds-ripple">
+                <div></div>
+                <div></div>
+              </div>
+            </div>
+          </div>
         </div>
+        <div class="mdc-dialog__scrim"></div>
       </div>
     </main>
     <nx-workspace-root></nx-workspace-root>
