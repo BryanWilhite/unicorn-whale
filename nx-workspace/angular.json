@@ -3,31 +3,50 @@
   "version": 1,
   "newProjectRoot": "",
   "projects": {
-    "http-client-testing": {
-      "root": "apps/http-client-testing/",
-      "sourceRoot": "apps/http-client-testing/src",
+    "component-testing": {
+      "root": "apps/component-testing/",
+      "sourceRoot": "apps/component-testing/src",
       "projectType": "application",
       "prefix": "nx-workspace",
       "schematics": {
+        "@nrwl/schematics:class": {
+          "skipTests": true
+        },
         "@nrwl/schematics:component": {
-          "style": "scss"
+          "style": "scss",
+          "skipTests": true
+        },
+        "@nrwl/schematics:directive": {
+          "skipTests": true
+        },
+        "@nrwl/schematics:guard": {
+          "skipTests": true
+        },
+        "@nrwl/schematics:module": {
+          "skipTests": true
+        },
+        "@nrwl/schematics:pipe": {
+          "skipTests": true
+        },
+        "@nrwl/schematics:service": {
+          "skipTests": true
         }
       },
       "architect": {
         "build": {
           "builder": "@angular-devkit/build-angular:browser",
           "options": {
-            "outputPath": "dist/apps/http-client-testing",
-            "index": "apps/http-client-testing/src/index.html",
-            "main": "apps/http-client-testing/src/main.ts",
-            "polyfills": "apps/http-client-testing/src/polyfills.ts",
-            "tsConfig": "apps/http-client-testing/tsconfig.app.json",
+            "outputPath": "dist/apps/component-testing",
+            "index": "apps/component-testing/src/index.html",
+            "main": "apps/component-testing/src/main.ts",
+            "polyfills": "apps/component-testing/src/polyfills.ts",
+            "tsConfig": "apps/component-testing/tsconfig.app.json",
             "assets": [
-              "apps/http-client-testing/src/favicon.ico",
-              "apps/http-client-testing/src/assets"
+              "apps/component-testing/src/favicon.ico",
+              "apps/component-testing/src/assets"
             ],
             "styles": [
-              "apps/http-client-testing/src/styles.scss"
+              "apps/component-testing/src/styles.scss"
             ],
             "scripts": [],
             "es5BrowserSupport": true
@@ -36,8 +55,8 @@
             "production": {
               "fileReplacements": [
                 {
-                  "replace": "apps/http-client-testing/src/environments/environment.ts",
-                  "with": "apps/http-client-testing/src/environments/environment.prod.ts"
+                  "replace": "apps/component-testing/src/environments/environment.ts",
+                  "with": "apps/component-testing/src/environments/environment.prod.ts"
                 }
               ],
               "optimization": true,
@@ -62,26 +81,26 @@
         "serve": {
           "builder": "@angular-devkit/build-angular:dev-server",
           "options": {
-            "browserTarget": "http-client-testing:build"
+            "browserTarget": "component-testing:build"
           },
           "configurations": {
             "production": {
-              "browserTarget": "http-client-testing:build:production"
+              "browserTarget": "component-testing:build:production"
             }
           }
         },
         "extract-i18n": {
           "builder": "@angular-devkit/build-angular:extract-i18n",
           "options": {
-            "browserTarget": "http-client-testing:build"
+            "browserTarget": "component-testing:build"
           }
         },
         "lint": {
           "builder": "@angular-devkit/build-angular:tslint",
           "options": {
             "tsConfig": [
-              "apps/http-client-testing/tsconfig.app.json",
-              "apps/http-client-testing/tsconfig.spec.json"
+              "apps/component-testing/tsconfig.app.json",
+              "apps/component-testing/tsconfig.spec.json"
             ],
             "exclude": [
               "**/node_modules/**"
@@ -91,10 +110,10 @@
         "test": {
           "builder": "@angular-devkit/build-angular:karma",
           "options": {
-            "main": "apps/http-client-testing/src/test.ts",
-            "tsConfig": "apps/http-client-testing/tsconfig.spec.json",
-            "karmaConfig": "apps/http-client-testing/karma.conf.js",
-            "polyfills": "apps/http-client-testing/src/polyfills.ts",
+            "main": "apps/component-testing/src/test.ts",
+            "tsConfig": "apps/component-testing/tsconfig.spec.json",
+            "karmaConfig": "apps/component-testing/karma.conf.js",
+            "polyfills": "apps/component-testing/src/polyfills.ts",
             "styles": [],
             "scripts": [],
             "assets": []
@@ -102,27 +121,27 @@
         }
       }
     },
-    "http-client-testing-e2e": {
-      "root": "apps/http-client-testing-e2e",
+    "component-testing-e2e": {
+      "root": "apps/component-testing-e2e",
       "projectType": "application",
       "prefix": "",
       "architect": {
         "e2e": {
           "builder": "@angular-devkit/build-angular:protractor",
           "options": {
-            "protractorConfig": "apps/http-client-testing-e2e/protractor.conf.js",
-            "devServerTarget": "http-client-testing:serve"
+            "protractorConfig": "apps/component-testing-e2e/protractor.conf.js",
+            "devServerTarget": "component-testing:serve"
           },
           "configurations": {
             "production": {
-              "devServerTarget": "http-client-testing:serve:production"
+              "devServerTarget": "component-testing:serve:production"
             }
           }
         },
         "lint": {
           "builder": "@angular-devkit/build-angular:tslint",
           "options": {
-            "tsConfig": "apps/http-client-testing-e2e/tsconfig.e2e.json",
+            "tsConfig": "apps/component-testing-e2e/tsconfig.e2e.json",
             "exclude": [
               "**/node_modules/**"
             ]
@@ -276,6 +295,133 @@
         }
       }
     },
+    "http-client-testing": {
+      "root": "apps/http-client-testing/",
+      "sourceRoot": "apps/http-client-testing/src",
+      "projectType": "application",
+      "prefix": "nx-workspace",
+      "schematics": {
+        "@nrwl/schematics:component": {
+          "style": "scss"
+        }
+      },
+      "architect": {
+        "build": {
+          "builder": "@angular-devkit/build-angular:browser",
+          "options": {
+            "outputPath": "dist/apps/http-client-testing",
+            "index": "apps/http-client-testing/src/index.html",
+            "main": "apps/http-client-testing/src/main.ts",
+            "polyfills": "apps/http-client-testing/src/polyfills.ts",
+            "tsConfig": "apps/http-client-testing/tsconfig.app.json",
+            "assets": [
+              "apps/http-client-testing/src/favicon.ico",
+              "apps/http-client-testing/src/assets"
+            ],
+            "styles": [
+              "apps/http-client-testing/src/styles.scss"
+            ],
+            "scripts": [],
+            "es5BrowserSupport": true
+          },
+          "configurations": {
+            "production": {
+              "fileReplacements": [
+                {
+                  "replace": "apps/http-client-testing/src/environments/environment.ts",
+                  "with": "apps/http-client-testing/src/environments/environment.prod.ts"
+                }
+              ],
+              "optimization": true,
+              "outputHashing": "all",
+              "sourceMap": false,
+              "extractCss": true,
+              "namedChunks": false,
+              "aot": true,
+              "extractLicenses": true,
+              "vendorChunk": false,
+              "buildOptimizer": true,
+              "budgets": [
+                {
+                  "type": "initial",
+                  "maximumWarning": "2mb",
+                  "maximumError": "5mb"
+                }
+              ]
+            }
+          }
+        },
+        "serve": {
+          "builder": "@angular-devkit/build-angular:dev-server",
+          "options": {
+            "browserTarget": "http-client-testing:build"
+          },
+          "configurations": {
+            "production": {
+              "browserTarget": "http-client-testing:build:production"
+            }
+          }
+        },
+        "extract-i18n": {
+          "builder": "@angular-devkit/build-angular:extract-i18n",
+          "options": {
+            "browserTarget": "http-client-testing:build"
+          }
+        },
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": [
+              "apps/http-client-testing/tsconfig.app.json",
+              "apps/http-client-testing/tsconfig.spec.json"
+            ],
+            "exclude": [
+              "**/node_modules/**"
+            ]
+          }
+        },
+        "test": {
+          "builder": "@angular-devkit/build-angular:karma",
+          "options": {
+            "main": "apps/http-client-testing/src/test.ts",
+            "tsConfig": "apps/http-client-testing/tsconfig.spec.json",
+            "karmaConfig": "apps/http-client-testing/karma.conf.js",
+            "polyfills": "apps/http-client-testing/src/polyfills.ts",
+            "styles": [],
+            "scripts": [],
+            "assets": []
+          }
+        }
+      }
+    },
+    "http-client-testing-e2e": {
+      "root": "apps/http-client-testing-e2e",
+      "projectType": "application",
+      "prefix": "",
+      "architect": {
+        "e2e": {
+          "builder": "@angular-devkit/build-angular:protractor",
+          "options": {
+            "protractorConfig": "apps/http-client-testing-e2e/protractor.conf.js",
+            "devServerTarget": "http-client-testing:serve"
+          },
+          "configurations": {
+            "production": {
+              "devServerTarget": "http-client-testing:serve:production"
+            }
+          }
+        },
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": "apps/http-client-testing-e2e/tsconfig.e2e.json",
+            "exclude": [
+              "**/node_modules/**"
+            ]
+          }
+        }
+      }
+    },
     "responsive-thumbnails": {
       "root": "apps/responsive-thumbnails/",
       "sourceRoot": "apps/responsive-thumbnails/src",
@@ -422,298 +568,6 @@
         }
       }
     },
-    "year-of-moo-animation": {
-      "root": "apps/year-of-moo-animation/",
-      "sourceRoot": "apps/year-of-moo-animation/src",
-      "projectType": "application",
-      "prefix": "nx-workspace",
-      "schematics": {
-        "@nrwl/schematics:class": {
-          "skipTests": true
-        },
-        "@nrwl/schematics:component": {
-          "style": "scss",
-          "skipTests": true
-        },
-        "@nrwl/schematics:directive": {
-          "skipTests": true
-        },
-        "@nrwl/schematics:guard": {
-          "skipTests": true
-        },
-        "@nrwl/schematics:module": {
-          "skipTests": true
-        },
-        "@nrwl/schematics:pipe": {
-          "skipTests": true
-        },
-        "@nrwl/schematics:service": {
-          "skipTests": true
-        }
-      },
-      "architect": {
-        "build": {
-          "builder": "@angular-devkit/build-angular:browser",
-          "options": {
-            "outputPath": "dist/apps/year-of-moo-animation",
-            "index": "apps/year-of-moo-animation/src/index.html",
-            "main": "apps/year-of-moo-animation/src/main.ts",
-            "polyfills": "apps/year-of-moo-animation/src/polyfills.ts",
-            "tsConfig": "apps/year-of-moo-animation/tsconfig.app.json",
-            "assets": [
-              "apps/year-of-moo-animation/src/favicon.ico",
-              "apps/year-of-moo-animation/src/assets"
-            ],
-            "styles": [
-              "apps/year-of-moo-animation/src/styles.scss"
-            ],
-            "scripts": [],
-            "es5BrowserSupport": true
-          },
-          "configurations": {
-            "production": {
-              "fileReplacements": [
-                {
-                  "replace": "apps/year-of-moo-animation/src/environments/environment.ts",
-                  "with": "apps/year-of-moo-animation/src/environments/environment.prod.ts"
-                }
-              ],
-              "optimization": true,
-              "outputHashing": "all",
-              "sourceMap": false,
-              "extractCss": true,
-              "namedChunks": false,
-              "aot": true,
-              "extractLicenses": true,
-              "vendorChunk": false,
-              "buildOptimizer": true,
-              "budgets": [
-                {
-                  "type": "initial",
-                  "maximumWarning": "2mb",
-                  "maximumError": "5mb"
-                }
-              ]
-            }
-          }
-        },
-        "serve": {
-          "builder": "@angular-devkit/build-angular:dev-server",
-          "options": {
-            "browserTarget": "year-of-moo-animation:build"
-          },
-          "configurations": {
-            "production": {
-              "browserTarget": "year-of-moo-animation:build:production"
-            }
-          }
-        },
-        "extract-i18n": {
-          "builder": "@angular-devkit/build-angular:extract-i18n",
-          "options": {
-            "browserTarget": "year-of-moo-animation:build"
-          }
-        },
-        "lint": {
-          "builder": "@angular-devkit/build-angular:tslint",
-          "options": {
-            "tsConfig": [
-              "apps/year-of-moo-animation/tsconfig.app.json",
-              "apps/year-of-moo-animation/tsconfig.spec.json"
-            ],
-            "exclude": [
-              "**/node_modules/**"
-            ]
-          }
-        },
-        "test": {
-          "builder": "@angular-devkit/build-angular:karma",
-          "options": {
-            "main": "apps/year-of-moo-animation/src/test.ts",
-            "tsConfig": "apps/year-of-moo-animation/tsconfig.spec.json",
-            "karmaConfig": "apps/year-of-moo-animation/karma.conf.js",
-            "polyfills": "apps/year-of-moo-animation/src/polyfills.ts",
-            "styles": [],
-            "scripts": [],
-            "assets": []
-          }
-        }
-      }
-    },
-    "year-of-moo-animation-e2e": {
-      "root": "apps/year-of-moo-animation-e2e",
-      "projectType": "application",
-      "prefix": "",
-      "architect": {
-        "e2e": {
-          "builder": "@angular-devkit/build-angular:protractor",
-          "options": {
-            "protractorConfig": "apps/year-of-moo-animation-e2e/protractor.conf.js",
-            "devServerTarget": "year-of-moo-animation:serve"
-          },
-          "configurations": {
-            "production": {
-              "devServerTarget": "year-of-moo-animation:serve:production"
-            }
-          }
-        },
-        "lint": {
-          "builder": "@angular-devkit/build-angular:tslint",
-          "options": {
-            "tsConfig": "apps/year-of-moo-animation-e2e/tsconfig.e2e.json",
-            "exclude": [
-              "**/node_modules/**"
-            ]
-          }
-        }
-      }
-    },
-    "component-testing": {
-      "root": "apps/component-testing/",
-      "sourceRoot": "apps/component-testing/src",
-      "projectType": "application",
-      "prefix": "nx-workspace",
-      "schematics": {
-        "@nrwl/schematics:class": {
-          "skipTests": true
-        },
-        "@nrwl/schematics:component": {
-          "style": "scss",
-          "skipTests": true
-        },
-        "@nrwl/schematics:directive": {
-          "skipTests": true
-        },
-        "@nrwl/schematics:guard": {
-          "skipTests": true
-        },
-        "@nrwl/schematics:module": {
-          "skipTests": true
-        },
-        "@nrwl/schematics:pipe": {
-          "skipTests": true
-        },
-        "@nrwl/schematics:service": {
-          "skipTests": true
-        }
-      },
-      "architect": {
-        "build": {
-          "builder": "@angular-devkit/build-angular:browser",
-          "options": {
-            "outputPath": "dist/apps/component-testing",
-            "index": "apps/component-testing/src/index.html",
-            "main": "apps/component-testing/src/main.ts",
-            "polyfills": "apps/component-testing/src/polyfills.ts",
-            "tsConfig": "apps/component-testing/tsconfig.app.json",
-            "assets": [
-              "apps/component-testing/src/favicon.ico",
-              "apps/component-testing/src/assets"
-            ],
-            "styles": [
-              "apps/component-testing/src/styles.scss"
-            ],
-            "scripts": [],
-            "es5BrowserSupport": true
-          },
-          "configurations": {
-            "production": {
-              "fileReplacements": [
-                {
-                  "replace": "apps/component-testing/src/environments/environment.ts",
-                  "with": "apps/component-testing/src/environments/environment.prod.ts"
-                }
-              ],
-              "optimization": true,
-              "outputHashing": "all",
-              "sourceMap": false,
-              "extractCss": true,
-              "namedChunks": false,
-              "aot": true,
-              "extractLicenses": true,
-              "vendorChunk": false,
-              "buildOptimizer": true,
-              "budgets": [
-                {
-                  "type": "initial",
-                  "maximumWarning": "2mb",
-                  "maximumError": "5mb"
-                }
-              ]
-            }
-          }
-        },
-        "serve": {
-          "builder": "@angular-devkit/build-angular:dev-server",
-          "options": {
-            "browserTarget": "component-testing:build"
-          },
-          "configurations": {
-            "production": {
-              "browserTarget": "component-testing:build:production"
-            }
-          }
-        },
-        "extract-i18n": {
-          "builder": "@angular-devkit/build-angular:extract-i18n",
-          "options": {
-            "browserTarget": "component-testing:build"
-          }
-        },
-        "lint": {
-          "builder": "@angular-devkit/build-angular:tslint",
-          "options": {
-            "tsConfig": [
-              "apps/component-testing/tsconfig.app.json",
-              "apps/component-testing/tsconfig.spec.json"
-            ],
-            "exclude": [
-              "**/node_modules/**"
-            ]
-          }
-        },
-        "test": {
-          "builder": "@angular-devkit/build-angular:karma",
-          "options": {
-            "main": "apps/component-testing/src/test.ts",
-            "tsConfig": "apps/component-testing/tsconfig.spec.json",
-            "karmaConfig": "apps/component-testing/karma.conf.js",
-            "polyfills": "apps/component-testing/src/polyfills.ts",
-            "styles": [],
-            "scripts": [],
-            "assets": []
-          }
-        }
-      }
-    },
-    "component-testing-e2e": {
-      "root": "apps/component-testing-e2e",
-      "projectType": "application",
-      "prefix": "",
-      "architect": {
-        "e2e": {
-          "builder": "@angular-devkit/build-angular:protractor",
-          "options": {
-            "protractorConfig": "apps/component-testing-e2e/protractor.conf.js",
-            "devServerTarget": "component-testing:serve"
-          },
-          "configurations": {
-            "production": {
-              "devServerTarget": "component-testing:serve:production"
-            }
-          }
-        },
-        "lint": {
-          "builder": "@angular-devkit/build-angular:tslint",
-          "options": {
-            "tsConfig": "apps/component-testing-e2e/tsconfig.e2e.json",
-            "exclude": [
-              "**/node_modules/**"
-            ]
-          }
-        }
-      }
-    },
     "seo-splash": {
       "root": "apps/seo-splash/",
       "sourceRoot": "apps/seo-splash/src",
@@ -853,6 +707,152 @@
           "builder": "@angular-devkit/build-angular:tslint",
           "options": {
             "tsConfig": "apps/seo-splash-e2e/tsconfig.e2e.json",
+            "exclude": [
+              "**/node_modules/**"
+            ]
+          }
+        }
+      }
+    },
+    "year-of-moo-animation": {
+      "root": "apps/year-of-moo-animation/",
+      "sourceRoot": "apps/year-of-moo-animation/src",
+      "projectType": "application",
+      "prefix": "nx-workspace",
+      "schematics": {
+        "@nrwl/schematics:class": {
+          "skipTests": true
+        },
+        "@nrwl/schematics:component": {
+          "style": "scss",
+          "skipTests": true
+        },
+        "@nrwl/schematics:directive": {
+          "skipTests": true
+        },
+        "@nrwl/schematics:guard": {
+          "skipTests": true
+        },
+        "@nrwl/schematics:module": {
+          "skipTests": true
+        },
+        "@nrwl/schematics:pipe": {
+          "skipTests": true
+        },
+        "@nrwl/schematics:service": {
+          "skipTests": true
+        }
+      },
+      "architect": {
+        "build": {
+          "builder": "@angular-devkit/build-angular:browser",
+          "options": {
+            "outputPath": "dist/apps/year-of-moo-animation",
+            "index": "apps/year-of-moo-animation/src/index.html",
+            "main": "apps/year-of-moo-animation/src/main.ts",
+            "polyfills": "apps/year-of-moo-animation/src/polyfills.ts",
+            "tsConfig": "apps/year-of-moo-animation/tsconfig.app.json",
+            "assets": [
+              "apps/year-of-moo-animation/src/favicon.ico",
+              "apps/year-of-moo-animation/src/assets"
+            ],
+            "styles": [
+              "apps/year-of-moo-animation/src/styles.scss"
+            ],
+            "scripts": [],
+            "es5BrowserSupport": true
+          },
+          "configurations": {
+            "production": {
+              "fileReplacements": [
+                {
+                  "replace": "apps/year-of-moo-animation/src/environments/environment.ts",
+                  "with": "apps/year-of-moo-animation/src/environments/environment.prod.ts"
+                }
+              ],
+              "optimization": true,
+              "outputHashing": "all",
+              "sourceMap": false,
+              "extractCss": true,
+              "namedChunks": false,
+              "aot": true,
+              "extractLicenses": true,
+              "vendorChunk": false,
+              "buildOptimizer": true,
+              "budgets": [
+                {
+                  "type": "initial",
+                  "maximumWarning": "2mb",
+                  "maximumError": "5mb"
+                }
+              ]
+            }
+          }
+        },
+        "serve": {
+          "builder": "@angular-devkit/build-angular:dev-server",
+          "options": {
+            "browserTarget": "year-of-moo-animation:build"
+          },
+          "configurations": {
+            "production": {
+              "browserTarget": "year-of-moo-animation:build:production"
+            }
+          }
+        },
+        "extract-i18n": {
+          "builder": "@angular-devkit/build-angular:extract-i18n",
+          "options": {
+            "browserTarget": "year-of-moo-animation:build"
+          }
+        },
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": [
+              "apps/year-of-moo-animation/tsconfig.app.json",
+              "apps/year-of-moo-animation/tsconfig.spec.json"
+            ],
+            "exclude": [
+              "**/node_modules/**"
+            ]
+          }
+        },
+        "test": {
+          "builder": "@angular-devkit/build-angular:karma",
+          "options": {
+            "main": "apps/year-of-moo-animation/src/test.ts",
+            "tsConfig": "apps/year-of-moo-animation/tsconfig.spec.json",
+            "karmaConfig": "apps/year-of-moo-animation/karma.conf.js",
+            "polyfills": "apps/year-of-moo-animation/src/polyfills.ts",
+            "styles": [],
+            "scripts": [],
+            "assets": []
+          }
+        }
+      }
+    },
+    "year-of-moo-animation-e2e": {
+      "root": "apps/year-of-moo-animation-e2e",
+      "projectType": "application",
+      "prefix": "",
+      "architect": {
+        "e2e": {
+          "builder": "@angular-devkit/build-angular:protractor",
+          "options": {
+            "protractorConfig": "apps/year-of-moo-animation-e2e/protractor.conf.js",
+            "devServerTarget": "year-of-moo-animation:serve"
+          },
+          "configurations": {
+            "production": {
+              "devServerTarget": "year-of-moo-animation:serve:production"
+            }
+          }
+        },
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": "apps/year-of-moo-animation-e2e/tsconfig.e2e.json",
             "exclude": [
               "**/node_modules/**"
             ]

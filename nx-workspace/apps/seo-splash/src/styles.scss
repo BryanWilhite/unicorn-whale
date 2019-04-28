@@ -22,6 +22,7 @@ main {
 }
 
 footer {
+    font-size: 0.8em;
     margin: 1em auto;
     max-width: 60%;
     .copyright {
@@ -40,7 +41,8 @@ footer {
 
 /* https://loading.io/css/ */
 .lds-ripple {
-    display: inline-block;
+    display: block;
+    margin: 0 auto;
     position: relative;
     width: 64px;
     height: 64px;

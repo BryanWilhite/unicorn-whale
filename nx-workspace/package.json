@@ -36,12 +36,16 @@
     "@angular/platform-browser": "^7.2.14",
     "@angular/platform-browser-dynamic": "^7.2.14",
     "@angular/router": "^7.2.14",
+    "@material/dialog": "^1.1.1",
+    "@material/feature-targeting": "^0.44.1",
+    "@material/typography": "^1.0.0",
     "@ngrx/effects": "7.2.0",
     "@ngrx/router-store": "7.2.0",
     "@ngrx/store": "7.2.0",
     "@nrwl/nx": "7.6.2",
     "core-js": "^2.5.4",
     "rxjs": "6.3.3",
+    "un": "0.0.0",
     "zone.js": "^0.8.26"
   },
   "devDependencies": {
